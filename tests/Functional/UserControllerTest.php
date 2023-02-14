@@ -17,5 +17,6 @@ class UserControllerTest extends WebTestCase
         $this->assertSelectorTextContains('label#password-label', 'Mot de passe:');
         $this->assertSelectorExists('input#username-input');
         $this->assertSelectorExists('input#password-input');
+        $this->assertSelectorTextContains('button#login-button', 'Connexion');
     }
 }
