@@ -9,7 +9,7 @@ class RestaurantControllerTest extends WebTestCase
     public function testIndexRendersWithCorrectTitle(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
         $this->assertPageTitleSame('Le Quai Antique');
@@ -18,7 +18,7 @@ class RestaurantControllerTest extends WebTestCase
     public function testIndexRendersWithHeader()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
 
         $this->assertSelectorExists('header');
         $this->assertSelectorTextContains('h1#restaurant-name','Le Quai Antique');
@@ -31,7 +31,7 @@ class RestaurantControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects();
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
 
         $client->clickLink('Se connecter');
 
