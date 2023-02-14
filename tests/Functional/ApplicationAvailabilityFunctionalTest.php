@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace Functional;
 
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -21,5 +21,6 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
     private function urlProvider(): Generator
     {
         yield ['/'];
+        yield ['/login'];
     }
 }
