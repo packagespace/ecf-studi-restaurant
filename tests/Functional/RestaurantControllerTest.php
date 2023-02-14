@@ -21,8 +21,9 @@ class RestaurantControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertSelectorExists('header');
-        $this->assertSelectorTextContains('header > h1','Le Quai Antique');
-        $this->assertSelectorExists('header > nav');
-        $this->assertSelectorTextContains('header > nav > a', 'Réserver');
+        $this->assertSelectorTextContains('#restaurant-name','Le Quai Antique');
+        $this->assertSelectorExists('header nav');
+        $this->assertSelectorExists('#login-link');
+        $this->assertSelectorTextContains('#reserve-link', 'Réserver');
     }
 }
