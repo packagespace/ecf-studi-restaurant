@@ -3,11 +3,11 @@
 {% block title %}Le Quai Antique - Connexion{% endblock %}
 
 {% block body %}
-    <form action="{{ path('homepage') }}">
+    <form action="{{ path('login') }}" method="post">
         <label for="username-input" id="username-label">Adresse email:</label>
-        <input id="username-input" type="email">
+        <input id="username-input" type="email" name="_username">
         <label for="password-input" id="password-label">Mot de passe:</label>
-        <input id="password-input" type="password">
-        <button id="login-button">Connexion</button>
+        <input id="password-input" type="password" name="_password">
+        <button id="login-button" type="submit">Connexion</button>
     </form>
 {% endblock %}

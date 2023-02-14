@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
@@ -36,8 +37,10 @@ class UserControllerTest extends WebTestCase
     public function testHeaderShowsLogoutLinkWhenLoggedIn()
     {
         $client = static::createClient();
-        self::markTestIncomplete('Need to implement user etc');
-        $client->loginUser();
+        /** @var UserRepository $userRepository*/
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $testUser = $userRepository->findAll()[0];
+        $client->loginUser($testUser);
 
         $client->request('GET', self::LOGIN_URL);
 
