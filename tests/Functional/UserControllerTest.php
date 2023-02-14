@@ -9,7 +9,7 @@ class UserControllerTest extends WebTestCase
     public function testLoginPageRendersCorrectly(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/');
+        $client->request('GET', '/login');
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('form');
