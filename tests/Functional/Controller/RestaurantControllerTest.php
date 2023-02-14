@@ -6,10 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RestaurantControllerTest extends WebTestCase
 {
+    const INDEX_URL = '/';
+
     public function testIndexRendersWithCorrectTitle(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/');
+        $client->request('GET', self::INDEX_URL);
 
         $this->assertResponseIsSuccessful();
         $this->assertPageTitleSame('Le Quai Antique');
@@ -18,7 +20,7 @@ class RestaurantControllerTest extends WebTestCase
     public function testIndexRendersWithHeader()
     {
         $client = static::createClient();
-        $client->request('GET', '/');
+        $client->request('GET', self::INDEX_URL);
 
         $this->assertSelectorExists('header');
         $this->assertSelectorTextContains('h1#restaurant-name','Le Quai Antique');
@@ -31,7 +33,7 @@ class RestaurantControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects();
-        $client->request('GET', '/');
+        $client->request('GET', self::INDEX_URL);
 
         $client->clickLink('Se connecter');
 
