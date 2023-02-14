@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional\Controller;
 
+use App\Factory\UserFactory;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -29,6 +30,12 @@ class UserControllerTest extends WebTestCase
         $client->request('GET', self::LOGIN_URL);
         $client->followRedirects();
 
+        $testUser = UserFactory::createOne([
+            'email' => 'test@mail.com',
+            'password' => 'root'
+        ]);
+
+        $client->
         $client->submitForm('Connexion');
 
         $this->assertPageTitleSame('Le Quai Antique');
