@@ -22,7 +22,29 @@ class UserControllerTest extends WebTestCase
         $this->assertSelectorTextContains('button#login-button', 'Connexion');
     }
 
-    public function testIndexRendersWithHeader()
+    public function testLoggingInRedirectsToTheHomePage()
+    {
+        $client = static::createClient();
+        $client->request('GET', self::LOGIN_URL);
+        $client->followRedirects();
+
+        $client->submitForm('Connexion');
+
+        $this->assertPageTitleSame('Le Quai Antique');
+    }
+
+    public function testHeaderShowsLogoutLinkWhenLoggedIn()
+    {
+        $client = static::createClient();
+        self::markTestIncomplete('Need to implement user etc');
+        $client->loginUser();
+
+        $client->request('GET', self::LOGIN_URL);
+
+        $this->assertSelectorExists('a#logout-link');
+    }
+    
+    public function testLoginRendersWithHeader()
     {
         $client = static::createClient();
         $client->request('GET', self::LOGIN_URL);

@@ -19,7 +19,11 @@
                 Le Quai Antique
             </h1>
             <nav>
-                <a id="login-link" href="{{ path('login') }}"><img src="" alt="Se connecter"></a>
+                {% if is_granted('ROLE_USER') %}
+                    <a id="logout-link"><img src="" alt="Se déconnecter"></a>
+                {% else %}
+                    <a id="login-link" href="{{ path('login') }}"><img src="" alt="Se connecter"></a>
+                {% endif %}
                 <a id="reserve-link">Réserver</a>
             </nav>
         </header>
