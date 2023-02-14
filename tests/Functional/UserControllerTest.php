@@ -13,5 +13,6 @@ class UserControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('form');
+        $this->assertSelectorTextContains('label#username-label', 'Adresse email:');
     }
 }
