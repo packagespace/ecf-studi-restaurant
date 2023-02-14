@@ -1,24 +1,31 @@
 <?php
 
-namespace App\Tests\Functional;
+namespace App\Tests\Functional\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class RestaurantControllerTest extends WebTestCase
+class UserControllerTest extends WebTestCase
 {
-    public function testIndexRendersWithCorrectTitle(): void
+    const LOGIN_URL = '/login';
+
+    public function testLoginPageRendersCorrectly(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/');
+        $client->request('GET', self::LOGIN_URL);
 
         $this->assertResponseIsSuccessful();
-        $this->assertPageTitleSame('Le Quai Antique');
+        $this->assertSelectorExists('form');
+        $this->assertSelectorTextContains('label#username-label', 'Adresse email:');
+        $this->assertSelectorTextContains('label#password-label', 'Mot de passe:');
+        $this->assertSelectorExists('input#username-input');
+        $this->assertSelectorExists('input#password-input');
+        $this->assertSelectorTextContains('button#login-button', 'Connexion');
     }
 
     public function testIndexRendersWithHeader()
     {
         $client = static::createClient();
-        $client->request('GET', '/');
+        $client->request('GET', self::LOGIN_URL);
 
         $this->assertSelectorExists('header');
         $this->assertSelectorTextContains('h1#restaurant-name','Le Quai Antique');
@@ -31,7 +38,7 @@ class RestaurantControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects();
-        $client->request('GET', '/');
+        $client->request('GET', self::LOGIN_URL);
 
         $client->clickLink('Se connecter');
 
