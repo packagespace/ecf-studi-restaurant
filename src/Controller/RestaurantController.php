@@ -15,10 +15,4 @@ class RestaurantController extends AbstractController
             'controller_name' => 'RestaurantController',
         ]);
     }
-
-    #[Route('/login', name: 'login')]
-    public function login()
-    {
-        return $this->render('/login.html.twig');
-    }
 }
