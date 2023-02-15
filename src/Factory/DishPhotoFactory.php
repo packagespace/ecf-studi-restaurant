@@ -48,9 +48,8 @@ final class DishPhotoFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'imageName' => self::faker()->text(255),
+            'image' => 'test/150x150-2-500x500.png',
             'title' => self::faker()->word(),
-            'imageFile' => new File('tests/150x150-2-500x500.png')
         ];
     }
 
