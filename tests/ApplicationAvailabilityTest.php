@@ -5,7 +5,7 @@ namespace App\Tests;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ApplicationAvailabilityFunctionalTest extends WebTestCase
+class ApplicationAvailabilityTest extends WebTestCase
 {
     /**
      * @dataProvider urlProvider
@@ -20,7 +20,7 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
 
     private function urlProvider(): Generator
     {
-        yield ['/'];
-        yield ['/login'];
+        yield 'homepage' => ['/'];
+        yield 'login page' => ['/login'];
     }
 }
