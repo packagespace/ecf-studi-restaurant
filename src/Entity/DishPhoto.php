@@ -19,8 +19,8 @@ class DishPhoto
     #[ORM\Column(length: 255)]
     private ?string $imageName = null;
 
-    #[Vich\UploadableField(mapping: 'dishPhoto', fileNameProperty: 'imageName')]
-    private ?File $imageFile = null;
+//    #[Vich\UploadableField(mapping: 'dishPhoto', fileNameProperty: 'imageName')]
+//    private ?File $imageFile = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -33,10 +33,10 @@ class DishPhoto
         return $this->id;
     }
 
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
+//    public function getImageName(): ?string
+//    {
+//        return $this->imageName;
+//    }
 
     public function setImageName(string $imageName): self
     {
@@ -45,6 +45,11 @@ class DishPhoto
         return $this;
     }
 
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+    
     public function getImageFile(): ?File
     {
         return $this->imageFile;
@@ -80,5 +85,13 @@ class DishPhoto
         $this->title = $title;
 
         return $this;
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }
