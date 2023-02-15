@@ -17,6 +17,14 @@ class RestaurantControllerTest extends WebTestCase
         $this->assertPageTitleSame('Le Quai Antique');
     }
 
+    public function testIndexRendersImages()
+    {
+        $client = static::createClient();
+        $client->request('GET', self::INDEX_URL);
+
+        $this->assertSelectorExists('img.gallery-image');
+    }
+
     public function testIndexRendersWithHeader()
     {
         $client = static::createClient();

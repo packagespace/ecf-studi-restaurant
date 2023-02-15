@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\DishPhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,9 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class RestaurantController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(): Response
+    public function index(DishPhotoRepository $dishPhotoRepository): Response
     {
+        $dishPhotos = $dishPhotoRepository->findAll();
+
         return $this->render('/index.html.twig', [
+            'dish_photos' => $dishPhotos,
             'controller_name' => 'RestaurantController',
         ]);
     }

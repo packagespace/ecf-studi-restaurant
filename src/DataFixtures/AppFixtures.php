@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\DishPhotoFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -15,7 +16,7 @@ class AppFixtures extends Fixture
             'email' => 'test@mail.com',
             'password' => 'root'
         ]);
-
+        DishPhotoFactory::createMany(10);
         $manager->flush();
     }
 }
