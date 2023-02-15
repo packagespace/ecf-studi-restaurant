@@ -25,7 +25,7 @@ class UserControllerTest extends WebTestCase
         $this->assertSelectorTextContains('button#login-button', 'Connexion');
     }
 
-    public function testLoggingInSuccessfullyRedirectsToTheHomePage()
+    public function testLoggingInSuccessfullyRedirectsToTheHomePageAsLoggedInUser()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', self::LOGIN_URL);
@@ -41,6 +41,7 @@ class UserControllerTest extends WebTestCase
         $client->submit($form);
 
         $this->assertPageTitleSame('Le Quai Antique');
+        $this->assertSelectorExists('a#logout-link');
     }
 
     public function testHeaderShowsLogoutLinkWhenLoggedIn()
