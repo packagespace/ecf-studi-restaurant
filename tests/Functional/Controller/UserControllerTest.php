@@ -79,4 +79,20 @@ class UserControllerTest extends WebTestCase
 
         $this->assertPageTitleSame('Le Quai Antique - Connexion');
     }
+
+    public function testHeaderLogoutLinkLogsUserOut()
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+        /** @var UserRepository $userRepository*/
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $testUser = $userRepository->findAll()[0];
+        $client->loginUser($testUser);
+
+        $client->request('GET', self::LOGIN_URL);
+
+        $client->clickLink('Se déconnecter');
+
+        $this->assertSelectorExists('a#login-link');
+    }
 }
