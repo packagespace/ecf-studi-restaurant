@@ -4,6 +4,7 @@ namespace App\Tests\Functional\Controller;
 
 use App\Factory\UserFactory;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
@@ -24,19 +25,20 @@ class UserControllerTest extends WebTestCase
         $this->assertSelectorTextContains('button#login-button', 'Connexion');
     }
 
-    public function testLoggingInRedirectsToTheHomePage()
+    public function testLoggingInSuccessfullyRedirectsToTheHomePage()
     {
         $client = static::createClient();
-        $client->request('GET', self::LOGIN_URL);
+        $crawler = $client->request('GET', self::LOGIN_URL);
         $client->followRedirects();
 
-        $testUser = UserFactory::createOne([
-            'email' => 'test@mail.com',
-            'password' => 'root'
-        ]);
+        $buttonCrawlerNode = $crawler->selectButton('Connexion');
 
-        $client->
-        $client->submitForm('Connexion');
+        $form = $buttonCrawlerNode->form();
+
+        $form['_username']->setValue('test@mail.com');
+        $form['_password']->setValue('root');
+
+        $client->submit($form);
 
         $this->assertPageTitleSame('Le Quai Antique');
     }

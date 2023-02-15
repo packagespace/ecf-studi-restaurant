@@ -11,5 +11,11 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         UserFactory::createMany(10);
+        UserFactory::createOne([
+            'email' => 'test@mail.com',
+            'password' => 'root'
+        ]);
+
+        $manager->flush();
     }
 }
