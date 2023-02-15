@@ -33,7 +33,7 @@ class DishPhoto
 
     public function getImage(): ?string
     {
-        return $this->image;
+        return sprintf('/images/dishes/%s', $this->image);
     }
 
     public function getTitle(): ?string
