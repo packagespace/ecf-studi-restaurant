@@ -6,7 +6,7 @@ use App\Factory\UserFactory;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class RestaurantControllerTest extends WebTestCase
+class IndexControllerTest extends WebTestCase
 {
     const INDEX_URL = '/';
 
