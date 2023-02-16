@@ -27,6 +27,22 @@ class RestaurantControllerTest extends WebTestCase
         $this->assertSelectorExists('img.gallery-image');
     }
 
+    public function testIndexHasReservationButton()
+    {
+        $client = static::createClient();
+        $client->request('GET', self::INDEX_URL);
+
+        $this->assertSelectorTextSame('button#reserve-button', 'Réserver');
+    }
+
+    public function testIndexHasMenuButton()
+    {
+        $client = static::createClient();
+        $client->request('GET', self::INDEX_URL);
+
+        $this->assertSelectorTextSame('button#menu-button', 'Carte et Menus');
+    }
+
     public function testIndexRendersWithHeader()
     {
         $client = static::createClient();
