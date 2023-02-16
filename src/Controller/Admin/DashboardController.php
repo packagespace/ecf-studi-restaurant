@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Dish;
 use App\Entity\DishCategory;
 use App\Entity\DishPhoto;
+use App\Entity\Menu;
+use App\Entity\SetMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -53,8 +55,10 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToRoute('Back to the website', 'fa fa-home', 'app_homepage');
-        yield MenuItem::linkToCrud('Gallery', 'fas fa-list', DishPhoto::class);
+        yield MenuItem::linkToCrud('Galerie', 'fas fa-list', DishPhoto::class);
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', DishCategory::class);
         yield MenuItem::linkToCrud('Plats', 'fas fa-list', Dish::class);
+        yield MenuItem::linkToCrud('Menus', 'fas fa-list', Menu::class);
+        yield MenuItem::linkToCrud('Formules', 'fas fa-list', SetMenu::class);
     }
 }

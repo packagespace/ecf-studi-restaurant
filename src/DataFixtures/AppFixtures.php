@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use App\Factory\DishCategoryFactory;
 use App\Factory\DishFactory;
 use App\Factory\DishPhotoFactory;
+use App\Factory\MenuFactory;
+use App\Factory\SetMenuFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -23,6 +25,9 @@ class AppFixtures extends Fixture
 
         DishCategoryFactory::createMany(5);
         DishFactory::createMany(20, fn() => ['category' => DishCategoryFactory::random()]);
+
+        MenuFactory::createMany(3);
+        SetMenuFactory::createMany(5, fn() => ['menu' => MenuFactory::random()]);
         $manager->flush();
     }
 }
