@@ -6,6 +6,7 @@ use App\Factory\DishCategoryFactory;
 use App\Factory\DishFactory;
 use App\Factory\DishPhotoFactory;
 use App\Factory\MenuFactory;
+use App\Factory\OpeningHourRangeFactory;
 use App\Factory\SetMenuFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -28,6 +29,8 @@ class AppFixtures extends Fixture
 
         MenuFactory::createMany(3);
         SetMenuFactory::createMany(5, fn() => ['menu' => MenuFactory::random()]);
+
+        OpeningHourRangeFactory::createMany(10);
         $manager->flush();
     }
 }
