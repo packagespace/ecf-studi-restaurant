@@ -50,6 +50,8 @@ final class DishFactory extends ModelFactory
             'category' => DishCategoryFactory::new(),
             'name' => self::faker()->sentence(3),
             'price' => self::faker()->numberBetween(1, 50),
+            'description' => self::faker()->optional()->sentence(),
+
         ];
     }
 
