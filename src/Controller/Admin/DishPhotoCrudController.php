@@ -22,7 +22,7 @@ class DishPhotoCrudController extends AbstractCrudController
     {
         return [
             TextField::new('title'),
-            ImageField::new('image')->setUploadDir('public/images/dishes')->setBasePath('images/dishes')
+            ImageField::new('image')->setUploadDir('public/images/dishes')
         ];
     }
 
