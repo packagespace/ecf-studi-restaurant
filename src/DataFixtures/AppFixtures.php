@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\DishCategoryFactory;
+use App\Factory\DishFactory;
 use App\Factory\DishPhotoFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -18,6 +20,9 @@ class AppFixtures extends Fixture
             'roles' => ["ROLE_ADMIN"]
         ]);
         DishPhotoFactory::createMany(10);
+
+        DishCategoryFactory::createMany(5);
+        DishFactory::createMany(20, ['category' => DishCategoryFactory::random()]);
         $manager->flush();
     }
 }
