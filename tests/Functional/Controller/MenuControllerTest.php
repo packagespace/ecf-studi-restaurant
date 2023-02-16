@@ -19,7 +19,7 @@ class MenuControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/menu');
 
-        $this->assertSelectorExists('ul#dish-categories');
+        $this->assertSelectorTextContains('ul#dish-categories', 'Carte');
         $this->assertSelectorExists('li.dish-category');
     }
 
