@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RestaurantController extends AbstractController
 {
-    #[Route('/', name: 'homepage')]
+    #[Route('/', name: 'app_homepage')]
     public function index(DishPhotoRepository $dishPhotoRepository): Response
     {
         $dishPhotos = $dishPhotoRepository->findAll();

@@ -3,7 +3,7 @@
 {% block title %}Le Quai Antique - Connexion{% endblock %}
 
 {% block body %}
-    <form action="{{ path('login') }}" method="post">
+    <form action="{{ path('app_login') }}" method="post">
         <label for="username-input" id="username-label">Adresse email:</label>
         <input id="username-input" type="email" name="_username">
         <label for="password-input" id="password-label">Mot de passe:</label>

@@ -8,13 +8,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/login', name: 'login')]
+    #[Route('/login', name: 'app_login')]
     public function login(): Response
     {
         return $this->render('/login.html.twig');
     }
 
-    #[Route('/logout', name: 'logout')]
+    #[Route('/logout', name: 'app_logout')]
     public function logout()
     {
 
