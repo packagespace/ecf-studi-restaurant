@@ -4,7 +4,8 @@
 {% block title %}Carte et Menus{% endblock %}
 
 {% block body %}
-    <ul id="dish-categories">Carte
+    <ul id="dish-categories">
+        Carte
         {% for dish_category in dish_categories %}
         <li class="dish-category">
             {{ dish_category.name }}
@@ -13,15 +14,31 @@
                     <dt class="category-dish-name">
                         {{ dish.name }}
                     </dt>
-                    <dd class="category-dish-price">
-                        {{ dish.price }}
-                    </dd>
                     <dd class="category-dish-description">
                         {{ dish.description }}
+                    </dd>
+                    <dd class="category-dish-price">
+                        {{ dish.price }}
                     </dd>
                 {% endfor %}
             </dl>
         </li>
     {% endfor %}
+    </ul>
+    <ul id="menus">
+        Menus
+        {% for menu in menus %}
+        <li class="menu">
+            {{ menu.name }}
+            <ul class="menu-set-menus">
+                {% for set_menu in menu.setMenus %}
+                    <li class="set-menu">
+                        <span class="set-menu-description">{{ set_menu.description }}</span>
+                        <span class="set-menu-price">{{ set_menu.price }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
     </ul>
 {% endblock %}

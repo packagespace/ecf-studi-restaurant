@@ -22,5 +22,6 @@ class ApplicationAvailabilityTest extends WebTestCase
     {
         yield 'homepage' => ['/'];
         yield 'login page' => ['/login'];
+        yield 'menu' => ['/menu'];
     }
 }
