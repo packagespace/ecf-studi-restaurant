@@ -24,7 +24,7 @@ class Dish
     private ?int $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'dishes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?DishCategory $category = null;
 
     public function getId(): ?int

@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
         DishPhotoFactory::createMany(10);
 
         DishCategoryFactory::createMany(5);
-        DishFactory::createMany(20, ['category' => DishCategoryFactory::random()]);
+        DishFactory::createMany(20, fn() => ['category' => DishCategoryFactory::random()]);
         $manager->flush();
     }
 }

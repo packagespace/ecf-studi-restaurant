@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Dish;
+use App\Entity\DishCategory;
 use App\Entity\DishPhoto;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -52,5 +54,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToRoute('Back to the website', 'fa fa-home', 'app_homepage');
         yield MenuItem::linkToCrud('Gallery', 'fas fa-list', DishPhoto::class);
+        yield MenuItem::linkToCrud('Catégories', 'fas fa-list', DishCategory::class);
+        yield MenuItem::linkToCrud('Plats', 'fas fa-list', Dish::class);
     }
 }
