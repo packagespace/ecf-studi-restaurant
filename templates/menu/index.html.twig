@@ -1,7 +1,27 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Carte et Menus{% endblock %}
 
 {% block body %}
-
+    <ul id="dish-categories">
+        {% for dish_category in dish_categories %}
+        <li class="dish-category">
+            {{ dish_category.name }}
+            <dl class="category-dishes">
+                {% for dish in dish_category.dishes%}
+                    <dt class="category-dish-name">
+                        {{ dish.name }}
+                    </dt>
+                    <dd class="category-dish-price">
+                        {{ dish.price }}
+                    </dd>
+                    <dd class="category-dish-description">
+                        {{ dish.description }}
+                    </dd>
+                {% endfor %}
+            </dl>
+        </li>
+    {% endfor %}
+    </ul>
 {% endblock %}
