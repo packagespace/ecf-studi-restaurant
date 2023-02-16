@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Le Quai Antique{% endblock %}
-
 {% block body %}
     {% for dish_photo in dish_photos %}
     <img alt="Gallery image rendered" src="{{ dish_photo.image }}" class="gallery-image">
