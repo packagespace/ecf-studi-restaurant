@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional\Controller;
 
+use App\Factory\UserFactory;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -36,6 +37,26 @@ class RestaurantControllerTest extends WebTestCase
         $this->assertSelectorExists('header nav');
         $this->assertSelectorExists('a#login-link');
         $this->assertSelectorTextContains('a#reserve-link', 'Réserver');
+    }
+
+    public function testHeaderShowsAdminPanelWhenLoggedInAsAdmin()
+    {
+        $client = static::createClient();
+        $user = UserFactory::createOne(['roles' => ["ROLE_ADMIN"]])->object();
+        $client->loginUser($user);
+        $client->request('GET', self::INDEX_URL);
+
+        $this->assertSelectorExists('a#admin-panel-link');
+    }
+
+    public function testHeaderHidesAdminPanelWhenLoggedInAsUser()
+    {
+        $client = static::createClient();
+        $user = UserFactory::createOne(['roles' => ["ROLE_USER"]])->object();
+        $client->loginUser($user);
+        $client->request('GET', self::INDEX_URL);
+
+        $this->assertSelectorNotExists('a#admin-panel-link');
     }
 
     public function testHeaderLoginLinkRedirectsToLoginPage()

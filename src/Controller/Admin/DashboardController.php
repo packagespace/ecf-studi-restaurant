@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\DishPhoto;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -36,6 +37,15 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('App');
+    }
+
+    public function configureCrud(): Crud
+    {
+        return Crud::new()
+            ->setPageTitle('index', 'Le Quai Antique - Administration - %entity_name%')
+            ->setPageTitle('detail', 'Le Quai Antique - Administration - %entity_name%')
+            ->setPageTitle('new', 'Le Quai Antique - Administration - %entity_name%')
+            ->setPageTitle('edit', 'Le Quai Antique - Administration - %entity_name%');
     }
 
     public function configureMenuItems(): iterable

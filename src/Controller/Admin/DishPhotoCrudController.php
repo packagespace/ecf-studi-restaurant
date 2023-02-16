@@ -17,6 +17,7 @@ class DishPhotoCrudController extends AbstractCrudController
     }
 
 
+
     public function configureFields(string $pageName): iterable
     {
         return [

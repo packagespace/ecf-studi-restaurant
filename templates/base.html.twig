@@ -24,6 +24,9 @@
                 {% else %}
                     <a id="login-link" href="{{ path('login') }}"><img src="" alt="Se connecter"></a>
                 {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a id="admin-panel-link" href="{{ path('admin') }}"><img src="" alt="Panel administrateur"></a>
+                {% endif %}
                 <a id="reserve-link">Réserver</a>
             </nav>
         </header>
