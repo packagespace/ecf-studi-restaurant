@@ -32,7 +32,7 @@ class IndexControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', self::INDEX_URL);
 
-        $this->assertSelectorTextSame('button#reserve-button', 'Réserver');
+        $this->assertSelectorTextSame('a#reserve-link-main', 'Réserver');
     }
 
     public function testIndexHasMenuButton()
@@ -40,10 +40,21 @@ class IndexControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', self::INDEX_URL);
 
-        $this->assertSelectorTextSame('button#menu-button', 'Carte et Menus');
+        $this->assertSelectorTextSame('a#menu-link', 'Carte et Menus');
     }
 
-    public function testIndexRendersWithHeader()
+    public function testClickingOnMenuButtonRedirectsToMenu()
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+        $client->request('GET', self::INDEX_URL);
+
+        $client->clickLink('Carte et Menus');
+
+        $this->assertPageTitleSame('Le Quai Antique - Carte et Menus');
+    }
+
+    public function testRendersWithHeader()
     {
         $client = static::createClient();
         $client->request('GET', self::INDEX_URL);

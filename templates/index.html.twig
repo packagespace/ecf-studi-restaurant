@@ -6,6 +6,6 @@
     {% for dish_photo in dish_photos %}
     <img alt="Gallery image rendered" src="{{ dish_photo.image }}" class="gallery-image">
     {% endfor %}
-    <button id="reserve-button">Réserver</button>
-    <button id="menu-button">Carte et Menus</button>
+    <a id="reserve-link-main">Réserver</a>
+    <a id="menu-link" href="{{ path('app_menu') }}">Carte et Menus</a>
 {% endblock %}
