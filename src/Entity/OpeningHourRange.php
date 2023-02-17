@@ -17,11 +17,11 @@ class OpeningHourRange
     #[ORM\Column(length: 255)]
     private ?string $day = null;
 
-    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
-    private ?\DateTimeImmutable $openingTime = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $openingTime = null;
 
-    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
-    private ?\DateTimeImmutable $closingTime = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $closingTime = null;
 
     public function getId(): ?int
     {
@@ -40,24 +40,24 @@ class OpeningHourRange
         return $this;
     }
 
-    public function getOpeningTime(): ?\DateTimeImmutable
+    public function getOpeningTime(): int
     {
         return $this->openingTime;
     }
 
-    public function setOpeningTime(\DateTimeImmutable $openingTime): self
+    public function setOpeningTime(int $openingTime): self
     {
         $this->openingTime = $openingTime;
 
         return $this;
     }
 
-    public function getClosingTime(): ?\DateTimeImmutable
+    public function getClosingTime(): int
     {
         return $this->closingTime;
     }
 
-    public function setClosingTime(\DateTimeImmutable $closingTime): self
+    public function setClosingTime(int $closingTime): self
     {
         $this->closingTime = $closingTime;
 
@@ -66,6 +66,6 @@ class OpeningHourRange
 
     public function getReadableOpeningHourRange(): string
     {
-        return $this->openingTime->format('H:i') . ' - ' . $this->closingTime->format('H:i');
+        return $this->openingTime . ':00 - ' . $this->closingTime . ':00';
     }
 }

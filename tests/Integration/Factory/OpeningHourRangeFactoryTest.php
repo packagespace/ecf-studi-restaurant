@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\OpeningHours\Integration\Functional\Integration\Factory;
+namespace App\Tests\Integration\Factory;
 
 use App\Factory\OpeningHourRangeFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

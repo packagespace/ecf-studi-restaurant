@@ -46,8 +46,8 @@ final class OpeningHourRangeFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-        $openingTime = \DateTimeImmutable::createFromFormat('H:i', self::faker()->time('H:i'));
-        $closingTime = \DateTimeImmutable::createFromFormat('H:i', self::faker()->time('H:i'));
+        $openingTime = self::faker()->numberBetween(0, 24);
+        $closingTime = self::faker()->numberBetween(0, 24);
 
         if ($openingTime > $closingTime) {
             $tmp = $openingTime;

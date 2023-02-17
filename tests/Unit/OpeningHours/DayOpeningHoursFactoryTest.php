@@ -22,10 +22,8 @@ class DayOpeningHoursFactoryTest extends TestCase
             $openingHourRanges[] = OpeningHourRangeFactory::createOne(
                 [
                     'day'         => 'monday',
-                    'openingTime' => \DateTimeImmutable::createFromFormat('H:i',
-                                                                          $timeRange[0]),
-                    'closingTime' => \DateTimeImmutable::createFromFormat('H:i',
-                                                                          $timeRange[1])
+                    'openingTime' => $timeRange[0],
+                    'closingTime' => $timeRange[1],
                 ]);
         }
         $a = $openingHourRanges;
@@ -40,8 +38,7 @@ class DayOpeningHoursFactoryTest extends TestCase
         yield [
             [
                 [
-                    '10:00',
-                    '12:00'
+                    10, 12
                 ]
             ],
             '10:00 - 12:00'
@@ -49,15 +46,13 @@ class DayOpeningHoursFactoryTest extends TestCase
         yield [
             [
                 [
-                    '12:00',
-                    '14:30'
+                    12, 14
                 ],
                 [
-                    '19:00',
-                    '22:00'
+                    19, 22
                 ]
             ],
-            '12:00 - 14:30, 19:00 - 22:00'
+            '12:00 - 14:00, 19:00 - 22:00'
         ];
     }
 }

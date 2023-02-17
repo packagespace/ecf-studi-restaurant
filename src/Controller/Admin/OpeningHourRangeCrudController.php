@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\OpeningHourRange;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class OpeningHourRangeCrudController extends AbstractCrudController
 {
@@ -20,17 +20,17 @@ class OpeningHourRangeCrudController extends AbstractCrudController
         return [
             ChoiceField::new('day')
                 ->setChoices([
-                    'Lundi' => 'monday',
-                    'Mardi' => 'tuesday',
-                    'Mercredi' => 'wednesday',
-                    'Jeudi' => 'thursday',
-                    'Vendredi' => 'friday',
-                    'Samedi' => 'saturday',
-                    'Dimanche' => 'sunday'
-                ])
+                                 'Lundi'    => 'monday',
+                                 'Mardi'    => 'tuesday',
+                                 'Mercredi' => 'wednesday',
+                                 'Jeudi'    => 'thursday',
+                                 'Vendredi' => 'friday',
+                                 'Samedi'   => 'saturday',
+                                 'Dimanche' => 'sunday'
+                             ])
                 ->renderExpanded(),
-            TimeField::new('openingTime'),
-            TimeField::new('closingTime'),
+            IntegerField::new('openingTime'),
+            IntegerField::new('closingTime'),
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\OpeningHours\Unit\Entity;
+namespace App\Tests\Unit\Entity;
 
 use App\Entity\OpeningHourRange;
 use App\Factory\OpeningHourRangeFactory;
@@ -20,8 +20,8 @@ class OpeningHourRangeTest extends TestCase
         $openingHourRange = OpeningHourRangeFactory::createOne(
             [
                 'day'         => 'monday',
-                'openingTime' => \DateTimeImmutable::createFromFormat('H:i', $openingTime),
-                'closingTime' => \DateTimeImmutable::createFromFormat('H:i', $closingTime)
+                'openingTime' => $openingTime,
+                'closingTime' => $closingTime
             ]);
 
         self::assertSame($expected, $openingHourRange->getReadableOpeningHourRange());
@@ -30,9 +30,21 @@ class OpeningHourRangeTest extends TestCase
     private function timeProvider(): \Generator
     {
         yield [
-            '12:30',
-            '13:00',
-            '12:30 - 13:00'
+            12,
+            13,
+            '12:00 - 13:00'
+        ];
+
+        yield [
+            12,
+            15,
+            '12:00 - 15:00'
+        ];
+
+        yield [
+            19,
+            23,
+            '19:00 - 23:00'
         ];
     }
 }
