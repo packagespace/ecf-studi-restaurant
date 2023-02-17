@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\E2E;
+namespace App\Tests\Unit\OpeningHours\Integration\Functional\E2E;
 
 use Symfony\Component\Panther\PantherTestCase;
 

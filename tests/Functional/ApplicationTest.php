@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Unit\OpeningHours\Integration\Functional;
 
 use App\Factory\UserFactory;
 use App\Repository\UserRepository;
@@ -91,6 +91,17 @@ class ApplicationTest extends WebTestCase
         $client->clickLink('Se déconnecter');
 
         $this->assertSelectorExists('a#login-link');
+    }
+
+    /**
+     * @dataProvider urlProvider
+     */
+    public function testFooterShowsOpeningHours($url)
+    {
+        $client = static::createClient();
+        $client->request('GET', $url);
+
+        $this->assertSelectorExists('footer');
     }
 
 

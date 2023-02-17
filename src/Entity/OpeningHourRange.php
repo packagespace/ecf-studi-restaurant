@@ -63,4 +63,9 @@ class OpeningHourRange
 
         return $this;
     }
+
+    public function getReadableOpeningHourRange(): string
+    {
+        return $this->openingTime->format('H:i') . ' - ' . $this->closingTime->format('H:i');
+    }
 }

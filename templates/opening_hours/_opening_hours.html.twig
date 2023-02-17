@@ -1,0 +1,10 @@
+<dl>
+    {% for day_opening_hours in opening_hours %}
+        <dt>
+            {{ day_opening_hours.getDayLabel | trans }}
+        </dt>
+        <dd>
+            {{ day_opening_hours.getOpeningHours }}
+        </dd>
+    {% endfor %}
+</dl>

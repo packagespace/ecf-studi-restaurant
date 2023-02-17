@@ -39,6 +39,15 @@ class OpeningHourRangeRepository extends ServiceEntityRepository
         }
     }
 
+    public function getOpenDays(): array
+    {
+        $openingHourRanges = $this->findAll();
+        $openDays = [];
+        foreach ($openingHourRanges as $openingHourRange){
+            $openDays[] = $openingHourRange->getDay();
+        }
+        return array_unique($openDays);
+    }
 //    /**
 //     * @return OpeningHourRange[] Returns an array of OpeningHourRange objects
 //     */

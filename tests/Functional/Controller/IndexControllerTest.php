@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functional\Controller;
+namespace App\Tests\Unit\OpeningHours\Integration\Functional\Functional\Controller;
 
 use App\Factory\UserFactory;
 use App\Repository\UserRepository;
