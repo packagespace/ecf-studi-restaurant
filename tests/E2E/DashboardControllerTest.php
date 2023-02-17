@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\OpeningHours\Integration\Functional\E2E;
+namespace App\Tests\E2E;
 
 use Symfony\Component\Panther\PantherTestCase;
 
@@ -16,6 +16,7 @@ class DashboardControllerTest extends PantherTestCase
         $client->followRedirects();
         $client->request('GET', '/');
 
+        $client->takeScreenshot('screen.png');
         $client->clickLink('Se connecter');
 
         $this->assertPageTitleSame('Le Quai Antique - Connexion');

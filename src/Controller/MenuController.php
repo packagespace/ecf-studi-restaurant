@@ -15,7 +15,7 @@ class MenuController extends AbstractController
     {
         $dishCategories = $dishCategoryRepository->findAll();
         $menus = $menuRepository->findAll();
-        return $this->render('menu/index.html.twig', [
+        return $this->render('menu.html.twig', [
             'dish_categories' => $dishCategories,
             'menus' => $menus
         ]);

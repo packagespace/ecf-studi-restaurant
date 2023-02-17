@@ -35,15 +35,15 @@ class ReservationType extends AbstractType
 //            ->add('allergies', TextareaType::class)
 //            ->add('save', SubmitType::class);
 
-        $builder->addEventListener(FormEvents::PRE_SUBMIT,
+        $builder->addEventListener(FormEvents::SUBMIT,
             function (FormEvent $event) use ($builder) {
-                $numberOfGuests = $event->getForm()->getData();
-                $event->getForm()->remove('date');
-                $event->getForm()
-                    ->add('date', DateType::class, [
-                        'widget' => 'single_text',
-                        'input'  => 'datetime_immutable',
-                    ]);
+                $form = $event->getForm();
+                $numberOfGuests = $form->getData();
+//                $form->remove('date');
+                $form->add('date', DateType::class, [
+                    'widget' => 'single_text',
+                    'input'  => 'datetime_immutable',
+                ]);
             });
 
     }

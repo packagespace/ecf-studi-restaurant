@@ -13,7 +13,7 @@ class OpeningHoursController extends AbstractController
     public function index(OpeningHoursCompiler $openingHoursCompiler): Response
     {
         $openingHours = $openingHoursCompiler->getOpeningHours();
-        return $this->render('opening_hours/_opening_hours.html.twig', [
+        return $this->render('_opening_hours.html.twig', [
             'opening_hours' => $openingHours,
         ]);
     }
