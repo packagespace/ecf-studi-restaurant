@@ -15,12 +15,21 @@ class OpeningHoursCompiler
 
     public function getOpeningHours(): array
     {
+        $daysOfWeek = [
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday',
+            'sunday'
+        ];
         $openDays = $this->repository->getOpenDays();
+        $openDaysSorted = array_intersect($daysOfWeek, $openDays);
         $openingHours = [];
-        foreach ($openDays as $openDay) {
+        foreach ($openDaysSorted as $openDay) {
             $openingHours[] = $this->getDayOpeningHours($openDay);
         }
-
         return $openingHours;
     }
 

@@ -57,7 +57,7 @@ final class OpeningHourRangeFactory extends ModelFactory
 
         return [
             'closingTime' => $closingTime,
-            'day' => strtolower(self::faker()->dayOfWeek),
+            'day' => strtolower(self::faker()->dayOfWeek()),
             'openingTime' => $openingTime,
         ];
     }
