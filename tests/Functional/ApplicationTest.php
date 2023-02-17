@@ -34,6 +34,20 @@ class ApplicationTest extends WebTestCase
         $this->assertSelectorTextContains('a#reserve-link', 'Réserver');
     }
 
+
+    /**
+     * @dataProvider urlProvider
+     */
+    public function testReservationLinkRedirectsToReservationPage($url)
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+        $client->request('GET', $url);
+
+        $client->clickLink('Réserver');
+        $this->assertPageTitleSame('Le Quai Antique - Réservation');
+    }
+
     /**
      * @dataProvider urlProvider
      */
@@ -110,5 +124,6 @@ class ApplicationTest extends WebTestCase
         yield 'homepage' => ['/'];
         yield 'login page' => ['/login'];
         yield 'menu' => ['/menu'];
+        yield 'reservation' => ['/reservation'];
     }
 }

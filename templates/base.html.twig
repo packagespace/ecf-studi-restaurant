@@ -33,7 +33,7 @@
         {% if is_granted('ROLE_ADMIN') %}
             <a id="admin-panel-link" href="{{ path('admin') }}"><img src="" alt="Panel administrateur"></a>
         {% endif %}
-        <a id="reserve-link">Réserver</a>
+        <a id="reserve-link" href={{ path('app_reservation') }}>Réserver</a>
     </nav>
 </header>
 {% block body %}{% endblock %}
