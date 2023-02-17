@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\OpeningHours\Integration\OpeningHours;
+namespace App\Tests\Integration\OpeningHours;
 
 use App\OpeningHours\{DayOpeningHours, OpeningHoursCompiler};
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

@@ -4,6 +4,10 @@
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
+ARG PHP_VERSION=8.2
+ARG CADDY_VERSION=2.6
+ARG NODE_VERSION=19
+
 # Builder images
 FROM composer/composer:2-bin AS composer
 
@@ -19,7 +23,7 @@ RUN xcaddy build \
 	--with github.com/dunglas/vulcain/caddy
 
 # Prod image
-FROM php:8.2-fpm-alpine AS app_php
+FROM php:${PHP_VERSION}-fpm-alpine AS app_composer
 
 # Allow to use development versions of Symfony
 ARG STABILITY="stable"
@@ -121,6 +125,22 @@ RUN set -eux; \
 		chmod +x bin/console; sync; \
     fi
 
+# node "stage"
+FROM node:${NODE_VERSION}-alpine AS symfony_node
+
+COPY --link --from=app_composer /srv/app /app/
+
+WORKDIR /app
+
+RUN npm install --force
+RUN npm run build
+## If you are building your code for production
+# RUN npm ci --only=production
+
+FROM app_composer AS app_php
+COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
+
+
 # Dev image
 FROM app_php AS app_php_dev
 
@@ -139,10 +159,11 @@ RUN set -eux; \
 RUN rm -f .env.local.php
 
 # Caddy image
-FROM caddy:2.6-alpine AS app_caddy
+FROM caddy:${CADDY_VERSION}-alpine AS app_caddy
 
 WORKDIR /srv/app
 
 COPY --from=app_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
+COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
