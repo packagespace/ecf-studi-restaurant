@@ -3,32 +3,7 @@
 {% block title %}Réservation{% endblock %}
 
 {% block body %}
-{{ form(form) }}
-<script>
-    const $date = $('#reservation_date');
-    // When sport gets selected ...
-    $date.change(function() {
-        // ... retrieve the corresponding form.
-        const $form = $(this).closest('form');
-        // Simulate form data, but only include the selected sport value.
-        var data = {};
-        data[$date.attr('name')] = $date.val();
-        data['reservation[_token]'] = $('#reservation__token').val();
-        // Submit data via AJAX to the form's action path.
-        $.ajax({
-            url : $form.attr('action'),
-            type: $form.attr('method'),
-            data : data,
-            complete: function(html) {
-                // Replace current position field ...
-                $('#reservation_time').replaceWith(
-                    // ... with the returned one from the AJAX response.
-                    $(html.responseText).find('#reservation_time')
-                );
-                // Position field now displays the appropriate positions.
-            }
-        });
-    });
-</script>
-
+    <div id="reservation-form-wrapper">
+        {{ form(form, {'attr' : {'data-controller': 'reservation' , 'data-action' : 'change->reservation#pickNumberOfGuests' , 'id': 'reservation-form'}}) }}
+    </div>
 {% endblock %}

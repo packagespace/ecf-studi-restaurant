@@ -22,52 +22,30 @@ class ReservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date', DateType::class, [
-                'widget' => 'single_text',
-                'input'  => 'datetime_immutable'
-            ])
-            ->add('save', SubmitType::class);
+////                // prevents rendering it as type="date", to avoid HTML5 date pickers
+////                'html5' => false,
+////
+////                // adds a class that can be selected in JavaScript
+////                'attr' => ['class' => 'js-datepicker'],
+//            ->add('time', ChoiceType::class, [
+////                'choices' => $possibleTimes
+//            ])
+            ->add('numberOfGuests', IntegerType::class, [
+            ]);
+//            ->add('allergies', TextareaType::class)
+//            ->add('save', SubmitType::class);
 
-        $formModifier = function (FormInterface $form, \DateTimeImmutable $reservationDate = null) {
-            $possibleTimes = null === $reservationDate ? [] : [
-                1,
-                234234,
-                2
-            ];
+        $builder->addEventListener(FormEvents::PRE_SUBMIT,
+            function (FormEvent $event) use ($builder) {
+                $numberOfGuests = $event->getForm()->getData();
+                $event->getForm()->remove('date');
+                $event->getForm()
+                    ->add('date', DateType::class, [
+                        'widget' => 'single_text',
+                        'input'  => 'datetime_immutable',
+                    ]);
+            });
 
-            $form
-                ->add('time', ChoiceType::class, [
-                    'choices' => $possibleTimes
-                ])
-                ->add('numberOfGuests', IntegerType::class)
-                ->add('allergies', TextareaType::class);
-        };
-
-            $builder->addEventListener(
-                FormEvents::PRE_SET_DATA,
-                function (FormEvent $event) use ($formModifier) {
-                    // this would be your entity, i.e. SportMeetup
-                    $data = $event->getData();
-
-                    $formModifier($event->getForm(), $data->getDate());
-                }
-            );
-
-
-        $builder->get('date')->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) use ($formModifier) {
-                $reservation = $event->getForm()->getData();
-
-                $formModifier($event->getForm()->getParent(), $reservation);
-            }
-        );
-//        if ($date) {
-//            $builder
-//                ->add('time', ChoiceType::class)
-//                ->add('numberOfGuests', IntegerType::class)
-//                ->add('allergies', TextareaType::class);
-//        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

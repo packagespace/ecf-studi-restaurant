@@ -281,6 +281,9 @@
             "config/packages/uid.yaml"
         ]
     },
+    "symfony/ux-turbo": {
+        "version": "v2.7.1"
+    },
     "symfony/validator": {
         "version": "6.2",
         "recipe": {
@@ -330,7 +333,7 @@
             "assets/app.js",
             "assets/bootstrap.js",
             "assets/controllers.json",
-            "assets/controllers/hello_controller.js",
+            "assets/controllers/reservation_controller.js",
             "assets/styles/app.css",
             "config/packages/webpack_encore.yaml",
             "package.json",
