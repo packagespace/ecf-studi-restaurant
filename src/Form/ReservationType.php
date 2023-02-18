@@ -38,7 +38,6 @@ class ReservationType extends AbstractType
                 'max' => (new \DateTimeImmutable())->add(\DateInterval::createFromDateString('1 year'))->format('Y-m-d')
             ]
         ]);
-
         $builder->add('allergies', TextareaType::class,[
             'required' => false
         ]);

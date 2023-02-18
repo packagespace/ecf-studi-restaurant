@@ -54,6 +54,8 @@ final class UserFactory extends ModelFactory
             'email' => self::faker()->email(),
             'password' => self::faker()->password(),
             'roles' => [],
+            'defaultNumberOfGuests' => self::faker()->optional()->numberBetween(1, 5),
+            'allergies' => self::faker()->optional()->text()
         ];
     }
 
