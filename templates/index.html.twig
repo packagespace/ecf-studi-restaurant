@@ -2,7 +2,7 @@
 
 {% block body %}
     {% for dish_photo in dish_photos %}
-    <img alt="Gallery image rendered" src="{{ dish_photo.image }}" class="gallery-image">
+    <img alt="Gallery image rendered" src="{{asset(dish_photo.image) }}" class="gallery-image">
     {% endfor %}
     <a id="reserve-link-main">Réserver</a>
     <a id="menu-link" href="{{ path('app_menu') }}">Carte et Menus</a>
