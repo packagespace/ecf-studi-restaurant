@@ -8,6 +8,7 @@ use App\Entity\DishCategory;
 use App\Entity\DishPhoto;
 use App\Entity\Menu;
 use App\Entity\OpeningHourRange;
+use App\Entity\Reservation;
 use App\Entity\SetMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -63,5 +64,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Menus', 'fas fa-list', Menu::class);
         yield MenuItem::linkToCrud('Formules', 'fas fa-list', SetMenu::class);
         yield MenuItem::linkToCrud('Heures d\'ouverture', 'fas fa-list', DayOpeningHours::class);
+        yield MenuItem::linkToCrud('Réservations', 'fas fa-list', Reservation::class);
     }
 }

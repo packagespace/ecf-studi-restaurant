@@ -31,8 +31,6 @@ class AppFixtures extends Fixture
         MenuFactory::createMany(3);
         SetMenuFactory::createMany(5, fn() => ['menu' => MenuFactory::random()]);
 
-        OpeningHourRangeFactory::createMany(10);
-
         DayOpeningHoursFactory::createOne(['dayOfWeek' => 'monday']);
         DayOpeningHoursFactory::createOne(['dayOfWeek' => 'wednesday']);
         DayOpeningHoursFactory::createOne(['dayOfWeek' => 'tuesday']);

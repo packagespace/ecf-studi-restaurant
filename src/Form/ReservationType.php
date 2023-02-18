@@ -39,7 +39,9 @@ class ReservationType extends AbstractType
             ]
         ]);
 
-        $builder->add('allergies', TextareaType::class);
+        $builder->add('allergies', TextareaType::class,[
+            'required' => false
+        ]);
         $builder->add('submit', SubmitType::class);
 
         $builder->addEventListener(
@@ -72,7 +74,7 @@ class ReservationType extends AbstractType
             $this->timeSlotGetter->getAvailableTimeSlots($this->numberOfGuests, $date);;
         $form->add('time', ChoiceType::class, [
             'choices'  => array_combine($timeSlotChoices, $timeSlotChoices),
-            'disabled' => null === $date || null === $this->numberOfGuests || [] === $timeSlotChoices
+            'disabled' => null === $date || null === $this->numberOfGuests || [] === $timeSlotChoices,
         ]);
     }
 
