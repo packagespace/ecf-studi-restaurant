@@ -118,28 +118,28 @@ class DayOpeningHours
     public function getLunchTimeSlots(): array
     {
         $timeSlots = [];
-        for ($hour = $this->getLunchOpeningTime(); $hour < $this->getLunchOpeningTime(); $hour++) {
-            $militaryTimeHour = $hour * 1000;
+        for ($hour = $this->getLunchOpeningTime(); $hour < $this->getLunchClosingTime() - 1; $hour++) {
+            $militaryTimeHour = $hour * 100;
             $timeSlots[] = $militaryTimeHour;
             $timeSlots[] = $militaryTimeHour + 15;
             $timeSlots[] = $militaryTimeHour + 30;
             $timeSlots[] = $militaryTimeHour + 45;
         }
-        $timeSlots[] = ($this->getLunchClosingTime() - 1) * 1000;
+        $timeSlots[] = ($this->getLunchClosingTime() - 1) * 100;
         return $timeSlots;
     }
 
     public function getDinnerTimeSlots(): array
     {
         $timeSlots = [];
-        for ($hour = $this->getDinnerOpeningTime(); $hour < $this->getDinnerOpeningTime(); $hour++) {
-            $militaryTimeHour = $hour * 1000;
+        for ($hour = $this->getDinnerOpeningTime(); $hour < $this->getDinnerClosingTime() - 1; $hour++) {
+            $militaryTimeHour = $hour * 100;
             $timeSlots[] = $militaryTimeHour;
             $timeSlots[] = $militaryTimeHour + 15;
             $timeSlots[] = $militaryTimeHour + 30;
             $timeSlots[] = $militaryTimeHour + 45;
         }
-        $timeSlots[] = ($this->getDinnerClosingTime() - 1) * 1000;
+        $timeSlots[] = ($this->getDinnerClosingTime() - 1) * 100;
         return $timeSlots;
     }
 }

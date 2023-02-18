@@ -16,9 +16,21 @@ class TimeSlotGetter
 
     public function getAvailableSlots(?DateTimeImmutable $date): ?array
     {
-        /** @var DayOpeningHours $dayOpeningHours*/
+        /** @var DayOpeningHours $dayOpeningHours */
         $dayOpeningHours = $this->dayOpeningHoursRepository->findBy(['dayOfWeek' => lcfirst($date->format('l'))]);
         $dayOpeningHours->getLunchTimeSlots();
         $dayOpeningHours->getDinnerTimeSlots();
+    }
+
+    public function getAvailableTimeSlots(?int $numberOfGuests, \DateTimeImmutable $date): array
+    {
+        /** @var DayOpeningHours $dayOpeningHours */
+        $dayOpeningHours = $this->dayOpeningHoursRepository->findOneBy(['dayOfWeek' => lcfirst($date->format('l'))]);
+        $dayOpeningHours->getLunchTimeSlots();
+        $dayOpeningHours->getDinnerTimeSlots();
+
+        return array_merge($dayOpeningHours->getLunchTimeSlots(),
+                           $dayOpeningHours->getDinnerTimeSlots()
+        );
     }
 }

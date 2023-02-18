@@ -21,9 +21,10 @@ class ReservationController extends AbstractController
 
         $form->handleRequest($request);
 
-//        if ($form->isSubmitted() && $form->isValid()) {
-////            return $this->redirectToRoute('app_reservation');
-//        }
+        if ($form->isSubmitted() && $form->isValid()) {
+            dd($reservation);
+            return $this->redirectToRoute('app_reservation');
+        }
 
         return $this->render('reservation/index.html.twig', [
             'reservation' => $reservation,
