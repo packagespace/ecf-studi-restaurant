@@ -2,13 +2,14 @@
 
 namespace App\OpeningHours;
 
+use App\Repository\DayOpeningHoursRepository;
 use App\Repository\OpeningHourRangeRepository;
 
 class OpeningHoursCompiler
 {
 
     public function __construct(
-        private readonly OpeningHourRangeRepository $repository,
+        private readonly DayOpeningHoursRepository $repository,
         private readonly DayOpeningHoursFactory     $dayOpeningHoursFactory)
     {
     }
@@ -24,8 +25,7 @@ class OpeningHoursCompiler
             'saturday',
             'sunday'
         ];
-        $openDays = $this->repository->getOpenDays();
-        $openDaysSorted = array_intersect($daysOfWeek, $openDays);
+        $dayOpeningHours = $this->repository->findAll();
         $openingHours = [];
         foreach ($openDaysSorted as $openDay) {
             $openingHours[] = $this->getDayOpeningHours($openDay);

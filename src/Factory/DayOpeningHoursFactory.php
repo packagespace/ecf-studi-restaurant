@@ -46,12 +46,15 @@ final class DayOpeningHoursFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $openForLunch = self::faker()->boolean;
+        $openForDinner = self::faker()->boolean;
+
         return [
             'dayOfWeek'         => self::faker()->text(255),
-            'lunchOpeningTime'  => self::faker()->optional()->numberBetween(0, 23),
-            'lunchClosingTime'  => self::faker()->optional()->numberBetween(0, 23),
-            'dinnerOpeningTime' => self::faker()->optional()->numberBetween(0, 23),
-            'dinnerClosingTime' => self::faker()->optional()->numberBetween(0, 23),
+            'lunchOpeningTime'  => $openForLunch ? self::faker()->numberBetween(0, 23) : null,
+            'lunchClosingTime'  => $openForLunch ? self::faker()->numberBetween(0, 23) : null,
+            'dinnerOpeningTime' => $openForDinner ? self::faker()->numberBetween(0, 23) : null,
+            'dinnerClosingTime' => $openForDinner ? self::faker()->numberBetween(0, 23) : null,
         ];
     }
 

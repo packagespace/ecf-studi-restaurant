@@ -19,10 +19,10 @@ class AppFixtures extends Fixture
     {
         UserFactory::createMany(10);
         UserFactory::createOne([
-            'email' => 'test@mail.com',
-            'password' => 'root',
-            'roles' => ["ROLE_ADMIN"]
-        ]);
+                                   'email'    => 'test@mail.com',
+                                   'password' => 'root',
+                                   'roles'    => ["ROLE_ADMIN"]
+                               ]);
         DishPhotoFactory::createMany(10);
 
         DishCategoryFactory::createMany(5);
@@ -33,7 +33,13 @@ class AppFixtures extends Fixture
 
         OpeningHourRangeFactory::createMany(10);
 
-        DayOpeningHoursFactory::createMany(10);
+        DayOpeningHoursFactory::createOne(['dayOfWeek' => 'monday']);
+        DayOpeningHoursFactory::createOne(['dayOfWeek' => 'wednesday']);
+        DayOpeningHoursFactory::createOne(['dayOfWeek' => 'tuesday']);
+        DayOpeningHoursFactory::createOne(['dayOfWeek' => 'thursday']);
+        DayOpeningHoursFactory::createOne(['dayOfWeek' => 'friday']);
+        DayOpeningHoursFactory::createOne(['dayOfWeek' => 'saturday']);
+        DayOpeningHoursFactory::createOne(['dayOfWeek' => 'sunday']);
         $manager->flush();
     }
 }

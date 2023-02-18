@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\OpeningHours\OpeningHoursCompiler;
+use App\Repository\DayOpeningHoursRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,11 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class OpeningHoursController extends AbstractController
 {
     #[Route('/opening/hours', name: 'app_opening_hours')]
-    public function index(OpeningHoursCompiler $openingHoursCompiler): Response
+    public function index(DayOpeningHoursRepository $repository): Response
     {
-        $openingHours = $openingHoursCompiler->getOpeningHours();
+        $dayOpeningHours = $repository->findAll();
         return $this->render('_opening_hours.html.twig', [
-            'opening_hours' => $openingHours,
+            'day_opening_hours' => $dayOpeningHours,
         ]);
     }
 }

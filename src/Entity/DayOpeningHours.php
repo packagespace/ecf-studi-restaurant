@@ -64,7 +64,7 @@ class DayOpeningHours
         return $this->lunchClosingTime;
     }
 
-    public function setLunchClosingTime(int $lunchClosingTime): self
+    public function setLunchClosingTime(?int $lunchClosingTime): self
     {
         $this->lunchClosingTime = $lunchClosingTime;
 
@@ -93,5 +93,25 @@ class DayOpeningHours
         $this->dinnerClosingTime = $dinnerClosingTime;
 
         return $this;
+    }
+
+    public function getDayLabel(): string
+    {
+        return ucfirst($this->getDayOfWeek());
+    }
+
+    public function isOpenForDinner(): bool
+    {
+        return ($this->getDinnerOpeningTime() && $this->getDinnerClosingTime());
+    }
+
+    public function isOpenForLunch(): bool
+    {
+        return ($this->getLunchOpeningTime() && $this->getLunchClosingTime());
+    }
+
+    public function isClosed(): bool
+    {
+        return !($this->isOpenForLunch() || $this->isOpenForDinner());
     }
 }
