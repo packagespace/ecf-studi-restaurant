@@ -115,8 +115,11 @@ class DayOpeningHours
         return !($this->isOpenForLunch() || $this->isOpenForDinner());
     }
 
-    public function getLunchTimeSlots(): array
+    public function getLunchTimeSlots(): ?array
     {
+        if (!$this->isOpenForLunch()) {
+            return [];
+        }
         $timeSlots = [];
         for ($hour = $this->getLunchOpeningTime(); $hour < $this->getLunchClosingTime() - 1; $hour++) {
             $militaryTimeHour = $hour * 100;
@@ -131,6 +134,9 @@ class DayOpeningHours
 
     public function getDinnerTimeSlots(): array
     {
+        if (!$this->isOpenForDinner()) {
+            return [];
+        }
         $timeSlots = [];
         for ($hour = $this->getDinnerOpeningTime(); $hour < $this->getDinnerClosingTime() - 1; $hour++) {
             $militaryTimeHour = $hour * 100;

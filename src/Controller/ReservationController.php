@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,8 +14,9 @@ use Symfony\UX\Turbo\TurboBundle;
 
 class ReservationController extends AbstractController
 {
+
     #[Route('/reservation', name: 'app_reservation')]
-    public function index(Request $request): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $reservation = new Reservation();
 
@@ -22,7 +25,8 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($reservation);
+            $entityManager->persist($reservation);
+            $entityManager->flush();
             return $this->redirectToRoute('app_reservation');
         }
 

@@ -8,6 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -37,6 +39,8 @@ class ReservationType extends AbstractType
             ]
         ]);
 
+        $builder->add('allergies', TextareaType::class);
+        $builder->add('submit', SubmitType::class);
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
@@ -68,7 +72,7 @@ class ReservationType extends AbstractType
             $this->timeSlotGetter->getAvailableTimeSlots($this->numberOfGuests, $date);;
         $form->add('time', ChoiceType::class, [
             'choices'  => array_combine($timeSlotChoices, $timeSlotChoices),
-            'disabled' => null === $date || null === $this->numberOfGuests
+            'disabled' => null === $date || null === $this->numberOfGuests || [] === $timeSlotChoices
         ]);
     }
 
