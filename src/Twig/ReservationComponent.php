@@ -2,10 +2,12 @@
 
 namespace App\Twig;
 
+use App\Entity\Reservation;
 use App\Form\ReservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
+use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
@@ -15,11 +17,11 @@ class ReservationComponent extends AbstractController
     use ComponentWithFormTrait;
     use DefaultActionTrait;
 
-//    #[LiveProp(fieldName: 'data')]
-//    public ?Reservation $reservation = null;
+    #[LiveProp(fieldName: 'data')]
+    public ?Reservation $reservation = null;
 
     protected function instantiateForm(): FormInterface
     {
-        return $this->createForm(ReservationType::class/*, $this->reservation*/);
+        return $this->createForm(ReservationType::class, $this->reservation);
     }
 }
