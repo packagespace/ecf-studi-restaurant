@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\DayOpeningHoursFactory;
 use App\Factory\DishCategoryFactory;
 use App\Factory\DishFactory;
 use App\Factory\DishPhotoFactory;
@@ -31,6 +32,8 @@ class AppFixtures extends Fixture
         SetMenuFactory::createMany(5, fn() => ['menu' => MenuFactory::random()]);
 
         OpeningHourRangeFactory::createMany(10);
+
+        DayOpeningHoursFactory::createMany(10);
         $manager->flush();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\DayOpeningHours;
 use App\Entity\Dish;
 use App\Entity\DishCategory;
 use App\Entity\DishPhoto;
@@ -62,5 +63,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Menus', 'fas fa-list', Menu::class);
         yield MenuItem::linkToCrud('Formules', 'fas fa-list', SetMenu::class);
         yield MenuItem::linkToCrud('Heures d\'ouverture', 'fas fa-list', OpeningHourRange::class);
+        yield MenuItem::linkToCrud('Heures d\'ouverture', 'fas fa-list', DayOpeningHours::class);
     }
 }
