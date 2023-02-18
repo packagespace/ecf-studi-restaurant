@@ -31,12 +31,12 @@ class Reservation
         return $this->id;
     }
 
-    public function getTime(): ?\DateTimeImmutable
+    public function getTime(): int
     {
         return $this->time;
     }
 
-    public function setTime(\DateTimeImmutable $time): self
+    public function setTime(int $time): self
     {
         $this->time = $time;
 

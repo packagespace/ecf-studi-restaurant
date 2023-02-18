@@ -7,9 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -18,40 +15,55 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationType extends AbstractType
 {
+    public const MEAL_BREAKFAST = 'breakfast';
+    public const MEAL_SECOND_BREAKFAST = 'second breakfast';
+    public const MEAL_ELEVENSES = 'elevenses';
+    public const MEAL_LUNCH = 'lunch';
+    public const MEAL_DINNER = 'dinner';
 
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-////                // prevents rendering it as type="date", to avoid HTML5 date pickers
-////                'html5' => false,
-////
-////                // adds a class that can be selected in JavaScript
-////                'attr' => ['class' => 'js-datepicker'],
-//            ->add('time', ChoiceType::class, [
-////                'choices' => $possibleTimes
-//            ])
-            ->add('numberOfGuests', IntegerType::class, [
-            ]);
-//            ->add('allergies', TextareaType::class)
-//            ->add('save', SubmitType::class);
+        $builder->add('numberOfGuests', IntegerType::class);
 
-        $builder->addEventListener(FormEvents::SUBMIT,
-            function (FormEvent $event) use ($builder) {
-                $form = $event->getForm();
-                $numberOfGuests = $form->getData();
-//                $form->remove('date');
-                $form->add('date', DateType::class, [
-                    'widget' => 'single_text',
-                    'input'  => 'datetime_immutable',
-                ]);
-            });
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) {
 
+                /** @var Reservation $data */
+                $data = $event->getData();
+
+                $numberOfGuests = $data?->getNumberOfGuests();
+                $this->addDatePicker($event->getForm(), $numberOfGuests);
+            }
+        );
+
+        $builder->get('numberOfGuests')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $numberOfGuests = $event->getForm()->getData();
+                $this->addDatePicker($event->getForm()->getParent(), $numberOfGuests);
+            }
+        );
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-                                   'data_class' => Reservation::class,
-                               ]);
+        $resolver->setDefaults(['data_class' => Reservation::class]);
+    }
+
+    private function getAvailableFoodChoices(string $meal): array
+    {
+
+
+        return [1,2,3];
+    }
+
+    public function addDatePicker(FormInterface $form, ?string $numberOfGuests)
+    {
+        $foodChoices = null === $numberOfGuests ? [] : $this->getAvailableFoodChoices($numberOfGuests);
+
+        $form->add('date', DateType::class, [
+            'disabled' => null === $numberOfGuests,
+        ]);
     }
 }

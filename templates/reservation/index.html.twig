@@ -3,7 +3,14 @@
 {% block title %}Réservation{% endblock %}
 
 {% block body %}
-    <div id="reservation-form-wrapper">
-        {{ form(form, {'attr' : {'data-controller': 'reservation' , 'data-action' : 'change->reservation#pickNumberOfGuests' , 'id': 'reservation-form'}}) }}
-    </div>
+{#    <div id="reservation-form-wrapper">#}
+{#        {{ form(form, {'attr' : {'data-controller': 'reservation' , 'data-action' : 'change->reservation#pickNumberOfGuests' , 'id': 'reservation-form'}}) }}#}
+{#    </div>#}
+
+{#    {{ component('reservation_form', {#}
+{#        reservation: reservation.id ? reservation : null,#}
+{#        form: form#}
+{#    }) }}#}
+
+    {{ component('reservation_form') }}
 {% endblock %}

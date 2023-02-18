@@ -21,21 +21,12 @@ class ReservationController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            if (TurboBundle::STREAM_FORMAT === $request->getPreferredFormat()) {
-                // If the request comes from Turbo, set the content type as text/vnd.turbo-stream.html and only send the HTML to update
-                $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
-                return $this->render('reservation/datepicker.stream.html.twig', [
-                    'reservation' => new Reservation(),
-                    'form' => $form
-                ]);
-            }
-            return $this->redirectToRoute('app_reservation');
-        }
+//        if ($form->isSubmitted() && $form->isValid()) {
+////            return $this->redirectToRoute('app_reservation');
+//        }
 
         return $this->render('reservation/index.html.twig', [
             'reservation' => $reservation,
-
             'form' => $form
         ]);
     }

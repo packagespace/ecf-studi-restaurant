@@ -11,6 +11,6 @@ import { Controller } from '@hotwired/stimulus';
  */
 export default class extends Controller {
     pickNumberOfGuests(){
-        this.element.closest('form').requestSubmit();
+        // this.element.closest('form').requestSubmit();
     }
 }
