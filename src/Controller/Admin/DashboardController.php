@@ -62,7 +62,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Plats', 'fas fa-list', Dish::class);
         yield MenuItem::linkToCrud('Menus', 'fas fa-list', Menu::class);
         yield MenuItem::linkToCrud('Formules', 'fas fa-list', SetMenu::class);
-        yield MenuItem::linkToCrud('Heures d\'ouverture', 'fas fa-list', OpeningHourRange::class);
         yield MenuItem::linkToCrud('Heures d\'ouverture', 'fas fa-list', DayOpeningHours::class);
     }
 }
