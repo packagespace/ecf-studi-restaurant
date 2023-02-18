@@ -14,8 +14,8 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
-    private ?\DateTimeImmutable $time = null;
+    #[ORM\Column]
+    private ?int $time = null;
 
     #[ORM\Column]
     private ?int $numberOfGuests = null;
