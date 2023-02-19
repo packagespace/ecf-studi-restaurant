@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Reservation;
+use App\Repository\DayOpeningHoursRepository;
 use App\TimeSlotFormatter;
 use App\TimeSlotGetter;
 use Symfony\Component\Form\AbstractType;
@@ -22,7 +23,10 @@ class ReservationType extends AbstractType
 
     private ?int $numberOfGuests;
 
-    public function __construct(private readonly TimeSlotGetter $timeSlotGetter, private readonly TimeSlotFormatter $timeSlotFormatter)
+    public function __construct(
+        private readonly TimeSlotGetter            $timeSlotGetter,
+        private readonly TimeSlotFormatter         $timeSlotFormatter,
+        private readonly DayOpeningHoursRepository $dayOpeningHoursRepository)
     {
     }
 
@@ -34,15 +38,15 @@ class ReservationType extends AbstractType
         $builder->add('date', DateType::class, [
             'input'  => 'datetime_immutable',
             'widget' => 'single_text',
-            'html5' => false,
+            'html5'  => false,
             'attr'   => [
-                'data-controller'=>"flatpickr",
+                'data-controller'               => "flatpickr",
                 'data-flatpickr-disable-mobile' => true,
-                'data-flatpickr-min-date' => (new \DateTimeImmutable())->format('Y-m-d'),
-                'data-flatpickr-max-date' => (new \DateTimeImmutable())->add(\DateInterval::createFromDateString('1 year'))->format('Y-m-d')
+                'data-flatpickr-min-date'       => (new \DateTimeImmutable())->format('Y-m-d'),
+                'data-flatpickr-max-date'       => (new \DateTimeImmutable())->add(\DateInterval::createFromDateString('1 year'))->format('Y-m-d')
             ]
         ]);
-        $builder->add('allergies', TextareaType::class,[
+        $builder->add('allergies', TextareaType::class, [
             'required' => false
         ]);
         $builder->add('submit', SubmitType::class);
@@ -73,11 +77,12 @@ class ReservationType extends AbstractType
 
     public function addTimeSlotPicker(FormInterface $form, ?\DateTimeImmutable $date)
     {
-        $timeSlots = (null === $date || null === $this->numberOfGuests) ? [] :
-            $this->timeSlotGetter->getAvailableTimeSlots($this->numberOfGuests, $date);;
+        $timeSlots = (null === $date || null === $this->numberOfGuests) ? []
+            : $this->timeSlotGetter->getAvailableTimeSlots($this->numberOfGuests, $date);;
         $form->add('time', ChoiceType::class, [
-            'choices'  => array_combine($this->timeSlotFormatter->getHumanReadableTimeSlotArray($timeSlots), $timeSlots),
-            'disabled' => null === $date || null === $this->numberOfGuests || [] === $timeSlots,
+            'choices'     => array_combine($this->timeSlotFormatter->getHumanReadableTimeSlotArray($timeSlots),
+                                           $timeSlots),
+            'disabled'    => null === $date || null === $this->numberOfGuests || [] === $timeSlots,
             'placeholder' => $date && $this->numberOfGuests && [] === $timeSlots ? 'No available slots' : null
         ]);
     }
