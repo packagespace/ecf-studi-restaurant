@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\MaximumNumberOfGuests;
 use App\Factory\DayOpeningHoursFactory;
 use App\Factory\DishCategoryFactory;
 use App\Factory\DishFactory;
 use App\Factory\DishPhotoFactory;
 use App\Factory\MenuFactory;
-use App\Factory\OpeningHourRangeFactory;
 use App\Factory\SetMenuFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -38,6 +38,7 @@ class AppFixtures extends Fixture
         DayOpeningHoursFactory::createOne(['dayOfWeek' => 'friday']);
         DayOpeningHoursFactory::createOne(['dayOfWeek' => 'saturday']);
         DayOpeningHoursFactory::createOne(['dayOfWeek' => 'sunday']);
+        $manager->persist((new MaximumNumberOfGuests())->setMaximumNumberOfGuests(10));
         $manager->flush();
     }
 }

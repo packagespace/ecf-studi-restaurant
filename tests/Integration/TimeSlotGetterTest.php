@@ -109,4 +109,6 @@ class TimeSlotGetterTest extends KernelTestCase
             $this->timeSlotGetter->getAvailableTimeSlots(3, $this->date
             ));
     }
+
+
 }
