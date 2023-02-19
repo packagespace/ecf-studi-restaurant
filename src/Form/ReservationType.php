@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Reservation;
+use App\TimeSlotFormatter;
 use App\TimeSlotGetter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -21,7 +22,7 @@ class ReservationType extends AbstractType
 
     private ?int $numberOfGuests;
 
-    public function __construct(private readonly TimeSlotGetter $timeSlotGetter)
+    public function __construct(private readonly TimeSlotGetter $timeSlotGetter, private readonly TimeSlotFormatter $timeSlotFormatter)
     {
     }
 
@@ -72,12 +73,12 @@ class ReservationType extends AbstractType
 
     public function addTimeSlotPicker(FormInterface $form, ?\DateTimeImmutable $date)
     {
-        $timeSlotChoices = (null === $date || null === $this->numberOfGuests) ? [] :
+        $timeSlots = (null === $date || null === $this->numberOfGuests) ? [] :
             $this->timeSlotGetter->getAvailableTimeSlots($this->numberOfGuests, $date);;
         $form->add('time', ChoiceType::class, [
-            'choices'  => array_combine($timeSlotChoices, $timeSlotChoices),
-            'disabled' => null === $date || null === $this->numberOfGuests || [] === $timeSlotChoices,
-            'placeholder' => $date && $this->numberOfGuests && [] === $timeSlotChoices ? 'No available slots' : null
+            'choices'  => array_combine($this->timeSlotFormatter->getHumanReadableTimeSlotArray($timeSlots), $timeSlots),
+            'disabled' => null === $date || null === $this->numberOfGuests || [] === $timeSlots,
+            'placeholder' => $date && $this->numberOfGuests && [] === $timeSlots ? 'No available slots' : null
         ]);
     }
 
