@@ -39,6 +39,14 @@ class DayOpeningHoursRepository extends ServiceEntityRepository
         }
     }
 
+    public function deleteAll()
+    {
+        $dayOpeningHours = $this->findAll();
+        foreach ($dayOpeningHours as $day) {
+            $this->remove($day);
+        }
+    }
+
 //    /**
 //     * @return DayOpeningHours[] Returns an array of DayOpeningHours objects
 //     */

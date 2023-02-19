@@ -39,6 +39,15 @@ class MaximumNumberOfGuestsRepository extends ServiceEntityRepository
         }
     }
 
+    public function deleteAll()
+    {
+        $entities = $this->findAll();
+        foreach ($entities as $entity) {
+            $this->remove($entity);
+        }
+    }
+
+
 //    /**
 //     * @return MaximumNumberOfGuests[] Returns an array of MaximumNumberOfGuests objects
 //     */
