@@ -125,5 +125,6 @@ class ApplicationTest extends WebTestCase
         yield 'login page' => ['/login'];
         yield 'menu' => ['/menu'];
         yield 'reservation' => ['/reservation'];
+        yield 'register' => ['/register'];
     }
 }

@@ -11,6 +11,11 @@
             {% endfor %}
         </div>
     </div>
-    <a id="reserve-link-main" href="{{ path('app_reservation') }}">Réserver</a>
-    <a id="menu-link" href="{{ path('app_menu') }}">Carte et Menus</a>
+    <div class="row">
+        <div class="vstack mx-auto">
+            <a class="btn btn-lg btn-primary col-8" id="reserve-link-main"
+               href="{{ path('app_reservation') }}">Réserver</a>
+            <a class="btn btn-lg btn-secondary col-8" id="menu-link" href="{{ path('app_menu') }}">Carte et Menus</a>
+        </div>
+    </div>
 {% endblock %}

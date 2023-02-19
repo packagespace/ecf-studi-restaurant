@@ -12,22 +12,15 @@ class TimeSlotGetter
 {
 
 
-    public function __construct(private readonly ReservationRepository $reservationRepository, private readonly DayOpeningHoursRepository $dayOpeningHoursRepository)
+    public function __construct(
+        private readonly ReservationRepository     $reservationRepository,
+        private readonly DayOpeningHoursRepository $dayOpeningHoursRepository
+    )
     {
-    }
-
-    public function getAvailableSlots(?DateTimeImmutable $date): ?array
-    {
-        /** @var DayOpeningHours $dayOpeningHours */
-        $dayOpeningHours = $this->dayOpeningHoursRepository->findBy(['dayOfWeek' => lcfirst($date->format('l'))]);
-
-        $dayOpeningHours->getLunchTimeSlots();
-        $dayOpeningHours->getDinnerTimeSlots();
     }
 
     public function getAvailableTimeSlots(?int $numberOfGuests, \DateTimeImmutable $date): array
     {
-
         /** @var ?DayOpeningHours $dayOpeningHours */
         $dayOpeningHours = $this->dayOpeningHoursRepository->findOneBy(['dayOfWeek' => lcfirst($date->format('l'))]);
         if (!$dayOpeningHours) {
@@ -36,11 +29,11 @@ class TimeSlotGetter
         $reservations = $this->reservationRepository->findBy(['date' => $date]);
         $timeSlots = [];
 
-        if($this->dayOpeningHoursHasAvailableLunchSlots($reservations, $dayOpeningHours)){
+        if ($this->dayOpeningHoursHasAvailableLunchSlots($reservations, $dayOpeningHours)) {
             $timeSlots = array_merge($timeSlots, $dayOpeningHours->getLunchTimeSlots());
         }
 
-        if($this->dayOpeningHoursHasAvailableDinnerSlots($reservations, $dayOpeningHours)){
+        if ($this->dayOpeningHoursHasAvailableDinnerSlots($reservations, $dayOpeningHours)) {
             $timeSlots = array_merge($timeSlots, $dayOpeningHours->getDinnerTimeSlots());
         }
 
