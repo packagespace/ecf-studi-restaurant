@@ -5,6 +5,7 @@ namespace App;
 use App\Entity\DayOpeningHours;
 use App\Entity\Reservation;
 use App\Repository\DayOpeningHoursRepository;
+use App\Repository\MaximumNumberOfGuestsRepository;
 use App\Repository\ReservationRepository;
 use DateTimeImmutable;
 
@@ -14,13 +15,15 @@ class TimeSlotGetter
 
     public function __construct(
         private readonly ReservationRepository     $reservationRepository,
-        private readonly DayOpeningHoursRepository $dayOpeningHoursRepository
+        private readonly DayOpeningHoursRepository $dayOpeningHoursRepository,
+        private readonly MaximumNumberOfGuestsRepository $maximumNumberOfGuestsRepository
     )
     {
     }
 
     public function getAvailableTimeSlots(?int $numberOfGuests, \DateTimeImmutable $date): array
     {
+        $maxGuests = $this->maximumNumberOfGuestsRepository->findAll()[0]->getMaximumNumberOfGuests();
         /** @var ?DayOpeningHours $dayOpeningHours */
         $dayOpeningHours = $this->dayOpeningHoursRepository->findOneBy(['dayOfWeek' => lcfirst($date->format('l'))]);
         if (!$dayOpeningHours || $dayOpeningHours->isClosed()) {
@@ -29,11 +32,11 @@ class TimeSlotGetter
         $reservations = $this->reservationRepository->findBy(['date' => $date]);
         $timeSlots = [];
 
-        if ($this->dayOpeningHoursHasAvailableLunchSlots($reservations, $dayOpeningHours)) {
+        if ($this->dayOpeningHoursHasAvailableLunchSlots($reservations, $dayOpeningHours, $numberOfGuests, $maxGuests)) {
             $timeSlots = array_merge($timeSlots, $dayOpeningHours->getLunchTimeSlots());
         }
 
-        if ($this->dayOpeningHoursHasAvailableDinnerSlots($reservations, $dayOpeningHours)) {
+        if ($this->dayOpeningHoursHasAvailableDinnerSlots($reservations, $dayOpeningHours, $numberOfGuests, $maxGuests)) {
             $timeSlots = array_merge($timeSlots, $dayOpeningHours->getDinnerTimeSlots());
         }
 
@@ -45,15 +48,15 @@ class TimeSlotGetter
      * @param DayOpeningHours $dayOpeningHours
      * @return bool
      */
-    private function dayOpeningHoursHasAvailableLunchSlots(array $reservations, DayOpeningHours $dayOpeningHours): bool
+    private function dayOpeningHoursHasAvailableLunchSlots(array $reservations, DayOpeningHours $dayOpeningHours, $numberOfGuests, $maxGuests): bool
     {
-        $sumGuests = 0;
+        $sumGuests = $numberOfGuests;
         foreach ($reservations as $reservation) {
             if ($this->reservationIsDuringLunch($reservation, $dayOpeningHours)) {
                 $sumGuests += $reservation->getNumberOfGuests();
             }
         }
-        return ($sumGuests <= 10);
+        return ($sumGuests <= $maxGuests);
     }
 
     private function reservationIsDuringLunch(Reservation $reservation, DayOpeningHours $dayOpeningHours): bool
@@ -66,16 +69,16 @@ class TimeSlotGetter
      * @param DayOpeningHours $dayOpeningHours
      * @return bool
      */
-    private function dayOpeningHoursHasAvailableDinnerSlots(array $reservations, DayOpeningHours $dayOpeningHours): bool
+    private function dayOpeningHoursHasAvailableDinnerSlots(array $reservations, DayOpeningHours $dayOpeningHours, $numberOfGuests, $maxGuests): bool
     {
 
-        $sumGuests = 0;
+        $sumGuests = $numberOfGuests;
         foreach ($reservations as $reservation) {
             if ($this->reservationIsDuringDinner($reservation, $dayOpeningHours)) {
                 $sumGuests += $reservation->getNumberOfGuests();
             }
         }
-        return ($sumGuests <= 10);
+        return ($sumGuests <= $maxGuests);
     }
 
     private function reservationIsDuringDinner(Reservation $reservation, DayOpeningHours $dayOpeningHours): bool
