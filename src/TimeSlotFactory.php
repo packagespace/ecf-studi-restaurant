@@ -9,7 +9,7 @@ class TimeSlotFactory
     {
     }
 
-    public function generateTimeSlot($prevResult = null): int
+    public static function generateTimeSlot($prevResult = null): int
     {
         do {
             $hours = rand(0, 23);

@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Reservation;
 use App\Repository\ReservationRepository;
+use App\TimeSlotFactory;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -46,11 +47,10 @@ final class ReservationFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-        $possibleTimeSlots = 24 * 4;
         return [
             'date' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'numberOfGuests' => self::faker()->randomNumber(),
-            'time' => self::faker()->numberBetween(0, $possibleTimeSlots - 1) * 15,
+            'time' => TimeSlotFactory::generateTimeSlot(),
             'allergies' => self::faker()->optional()->text()
         ];
     }
