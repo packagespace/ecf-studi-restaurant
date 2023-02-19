@@ -5,7 +5,7 @@ namespace App;
 class TimeSlotFactory
 {
 
-    public function __construct()
+    private function __construct()
     {
     }
 
