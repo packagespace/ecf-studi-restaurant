@@ -11,12 +11,11 @@ class TimeSlotFactory
 
     public function generateTimeSlot($prevResult = null): int
     {
-        $rand = rand(min: 0, max: 2359);
-        while (
-            (($rand - (floor($rand / 100) * 100)) % 15 !== 0)
-            || ($rand - (floor($rand / 100) * 100) > 59) || $rand === $prevResult) {
-            $rand = rand(min: 0, max: 2359);
-        }
+        do {
+            $hours = rand(0, 23);
+            $minutes = rand(0, 3) * 15;
+            $rand = $hours * 100 + $minutes;
+        } while ($rand === $prevResult);
         return $rand;
     }
 }

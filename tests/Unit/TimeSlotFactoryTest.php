@@ -4,7 +4,6 @@ namespace App\Tests\Unit;
 
 use App\TimeSlotFactory;
 use PHPUnit\Framework\TestCase;
-use function PHPUnit\Framework\assertLessThanOrEqual;
 
 class TimeSlotFactoryTest extends TestCase
 {
