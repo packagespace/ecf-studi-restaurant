@@ -4,8 +4,13 @@
 {% block title %}Carte et Menus{% endblock %}
 
 {% block body %}
+
+
+    <nav class="nav nav-pills nav-fill mb-3">
+        <a class="nav-link active" aria-current="page" href="#">Carte</a>
+        <a class="nav-link" href="{{ path('app_set_menus') }}">Menus</a>
+    </nav>
     <ul id="dish-categories">
-        Carte
         {% for dish_category in dish_categories %}
         <li class="dish-category">
             {{ dish_category.name }}

@@ -3,14 +3,50 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <h2>Register</h2>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_rest(registrationForm) }}
-        <button type="submit" class="btn">Register</button>
+    {{ form_start(registrationForm, {
+        'attr': {
+            'class' : 'vstack col-9 mx-auto my-3'
+        }
+    }) }}
+    {{ form_label(registrationForm.email) }}
+    {{ form_errors(registrationForm.email) }}
+    {{ form_widget(registrationForm.email, {
+        'attr' : {
+            'class' : 'form-control mb-3'
+        }
+    }) }}
+    {{ form_help(registrationForm.email) }}
+
+    <label class="form-label" for="plainPassword">Password</label>
+    {{ form_errors(registrationForm.plainPassword) }}
+    {{ form_widget(registrationForm.plainPassword, {
+        'attr' : {
+            'class' : 'form-control mb-3'
+        }
+    }) }}
+    {{ form_help(registrationForm.plainPassword) }}
+
+    {{ form_label(registrationForm.defaultNumberOfGuests) }}
+    {{ form_errors(registrationForm.defaultNumberOfGuests) }}
+    {{ form_widget(registrationForm.defaultNumberOfGuests, {
+        'attr' : {
+            'class' : 'form-control mb-3'
+        }
+    }) }}
+    {{ form_help(registrationForm.defaultNumberOfGuests) }}
+
+    {{ form_label(registrationForm.allergies) }}
+    {{ form_errors(registrationForm.allergies) }}
+    {{ form_widget(registrationForm.allergies, {
+        'attr' : {
+            'class' : 'form-control mb-3'
+        }
+    }) }}
+    {{ form_help(registrationForm.allergies) }}
+
+    {{ form_rest(registrationForm) }}
+    <button type="submit" class="btn btn-lg btn-primary col-9 mx-auto">Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

@@ -20,4 +20,15 @@ class MenuController extends AbstractController
             'menus' => $menus
         ]);
     }
+
+    #[Route('/set-menus', name: 'app_set_menus')]
+    public function setMenus(DishCategoryRepository $dishCategoryRepository, MenuRepository $menuRepository): Response
+    {
+        $dishCategories = $dishCategoryRepository->findAll();
+        $menus = $menuRepository->findAll();
+        return $this->render('set_menus.html.twig', [
+            'dish_categories' => $dishCategories,
+            'menus' => $menus
+        ]);
+    }
 }

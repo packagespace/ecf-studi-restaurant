@@ -31,15 +31,15 @@
     </div>
     <nav class="row">
         {% if is_granted('ROLE_USER') %}
-            <a id="logout-link" href="{{ path('app_logout') }}" class="col-2 justify-content-center"><img src="{{ asset('images/logout.png') }}" class="small-icon" alt="Se déconnecter"></a>
+            <a id="logout-link" href="{{ path('app_logout') }}" class="col-2 h-100 my-auto"><img src="{{ asset('images/logout.png') }}" class="small-icon align-middle" alt="Se déconnecter"></a>
         {% else %}
-            <a id="login-link" href="{{ path('app_login') }}" class="col-2 justify-content-center"><img src="{{ asset('images/user.png') }}" class="small-icon" alt="Se connecter"></a>
+            <a id="login-link" href="{{ path('app_login') }}" class="col-2  h-100 my-auto"><img src="{{ asset('images/user.png') }}" class="small-icon" alt="Se connecter"></a>
         {% endif %}
         {% if is_granted('ROLE_ADMIN') %}
-            <a id="admin-panel-link" href="{{ path('admin') }}"  class="col-2"><img src="{{ asset('images/admin.png') }}" class="small-icon" alt="Panel administrateur"></a>
+            <a id="admin-panel-link" href="{{ path('admin') }}"  class="col-2  h-100 my-auto"><img src="{{ asset('images/admin.png') }}" class="small-icon" alt="Panel administrateur"></a>
         {% endif %}
         <div class="col"></div>
-        <a id="reserve-link" href="{{ path('app_reservation') }}" class="col-4">Réserver</a>
+        <a id="reserve-link" href="{{ path('app_reservation') }}" class="col-4 btn btn-danger me-3  h-100 my-auto">Réserver</a>
     </nav>
 </header>
 <div class="container-fluid my-3">

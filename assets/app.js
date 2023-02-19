@@ -10,5 +10,6 @@ import './styles/app.css';
 import 'bootstrap/scss/bootstrap.scss';
 import 'swiper/swiper-bundle.css'
 import 'bootstrap';
+import 'flatpickr/dist/flatpickr.css';
 // start the Stimulus application
 import './bootstrap';

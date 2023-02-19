@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Carte et Menus{% endblock %}
+
+{% block body %}
+    <nav class="nav nav-pills nav-fill mb-3">
+    <a class="nav-link" href="{{ path('app_menu') }}">Carte</a>
+    <a class="nav-link active" aria-current="page" href="#">Menus</a>
+    </nav>
+    <ul id="menus">
+        {% for menu in menus %}
+            <li class="menu">
+                {{ menu.name }}
+                <ul class="menu-set-menus">
+                    {% for set_menu in menu.setMenus %}
+                        <li class="set-menu">
+                            <span class="set-menu-description">{{ set_menu.description }}</span>
+                            <span class="set-menu-price">{{ set_menu.price }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

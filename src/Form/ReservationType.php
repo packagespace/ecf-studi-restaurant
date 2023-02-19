@@ -33,9 +33,12 @@ class ReservationType extends AbstractType
         $builder->add('date', DateType::class, [
             'input'  => 'datetime_immutable',
             'widget' => 'single_text',
+            'html5' => false,
             'attr'   => [
-                'min' => (new \DateTimeImmutable())->format('Y-m-d'),
-                'max' => (new \DateTimeImmutable())->add(\DateInterval::createFromDateString('1 year'))->format('Y-m-d')
+                'data-controller'=>"flatpickr",
+                'data-flatpickr-disable-mobile' => true,
+                'data-flatpickr-min-date' => (new \DateTimeImmutable())->format('Y-m-d'),
+                'data-flatpickr-max-date' => (new \DateTimeImmutable())->add(\DateInterval::createFromDateString('1 year'))->format('Y-m-d')
             ]
         ]);
         $builder->add('allergies', TextareaType::class,[
