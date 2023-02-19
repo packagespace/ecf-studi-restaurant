@@ -18,12 +18,15 @@ class ReservationController extends AbstractController
     #[Route('/reservation', name: 'app_reservation')]
     public function index(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
-        /** @var ?User $user*/
+        /** @var ?User $user */
         $user = $security->getUser();
         $reservation = new Reservation();
         if ($user) {
             $reservation->setAllergies($user->getAllergies());
-            $reservation->setNumberOfGuests($user->getDefaultNumberOfGuests());
+            if ($user->getDefaultNumberOfGuests() !== null) {
+                $reservation->setNumberOfGuests($user->getDefaultNumberOfGuests());
+            }
+
         }
 
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -38,7 +41,7 @@ class ReservationController extends AbstractController
 
         return $this->render('reservation/index.html.twig', [
             'reservation' => $reservation,
-            'form' => $form
+            'form'        => $form
         ]);
     }
 }

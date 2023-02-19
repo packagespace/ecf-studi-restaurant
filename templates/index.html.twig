@@ -1,9 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for dish_photo in dish_photos %}
-    <img alt="Gallery image rendered" src="{{asset(dish_photo.image) }}" class="gallery-image">
-    {% endfor %}
+    <div data-controller="carousel" class="swiper" data-carousel-options-value='{"autoplay": true}'>
+        <div class="swiper-wrapper">
+            {% for dish_photo in dish_photos %}
+                <div class="swiper-slide">
+                    <img alt="Gallery image" src="{{ asset(dish_photo.image) }}"
+                         class="gallery-image img-fluid">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
     <a id="reserve-link-main">Réserver</a>
     <a id="menu-link" href="{{ path('app_menu') }}">Carte et Menus</a>
 {% endblock %}

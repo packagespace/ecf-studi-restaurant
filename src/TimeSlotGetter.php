@@ -28,8 +28,11 @@ class TimeSlotGetter
     public function getAvailableTimeSlots(?int $numberOfGuests, \DateTimeImmutable $date): array
     {
 
-        /** @var DayOpeningHours $dayOpeningHours */
+        /** @var ?DayOpeningHours $dayOpeningHours */
         $dayOpeningHours = $this->dayOpeningHoursRepository->findOneBy(['dayOfWeek' => lcfirst($date->format('l'))]);
+        if (!$dayOpeningHours) {
+            return [];
+        }
         $reservations = $this->reservationRepository->findBy(['date' => $date]);
         $timeSlots = [];
 
