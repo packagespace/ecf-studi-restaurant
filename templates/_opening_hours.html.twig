@@ -1,22 +1,35 @@
-<dl>
+<dl class="mx-3">
     {% for day in day_opening_hours %}
-        <dt>
-            {{ day.getDayLabel | trans }}
-        </dt>
-        {% if day.isOpenForLunch %}
-            <dd>
-                {{ day.getLunchOpeningTime }}:00 - {{ day.getLunchClosingTime }}:00
-            </dd>
-        {% endif %}
-        {% if day.isOpenForDinner %}
-            <dd>
-                {{ day.getDinnerOpeningTime }}:00 - {{ day.getDinnerClosingTime }}:00
-            </dd>
-        {% endif %}
-        {% if day.isClosed %}
-            <dd>
-                Fermé
-            </dd>
-        {% endif %}
+        <div class="row text-nowrap lh-1">
+            <dt class="col-4 text-end">
+                <small>
+                    {{ day.getDayLabel | trans }}
+                </small>
+            </dt>
+            {% if day.isClosed %}
+                <dd class="col-8 text-center">
+                    Fermé
+                </dd>
+            {% else %}
+                <dd class="col-4">
+
+                    {% if day.isOpenForLunch %}
+                        <small>
+                            {{ day.getLunchOpeningTime }}:00 - {{ day.getLunchClosingTime }}:00
+                        </small>
+
+                    {% endif %}
+                </dd>
+                <dd class="col-4">
+                    {% if day.isOpenForDinner %}
+                        <small>
+                            {{ day.getDinnerOpeningTime }}:00 - {{ day.getDinnerClosingTime }}:00
+                        </small>
+
+                    {% endif %}
+                </dd>
+            {% endif %}
+
+        </div>
     {% endfor %}
 </dl>

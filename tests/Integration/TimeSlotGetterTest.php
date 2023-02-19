@@ -2,7 +2,6 @@
 
 namespace App\Tests\Integration;
 
-use App\Entity\Reservation;
 use App\Factory\DayOpeningHoursFactory;
 use App\Factory\ReservationFactory;
 use App\TimeSlotGetter;

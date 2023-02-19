@@ -6,16 +6,14 @@
             {% for dish_photo in dish_photos %}
                 <div class="swiper-slide">
                     <img alt="Gallery image" src="{{ asset(dish_photo.image) }}"
-                         class="gallery-image img-fluid">
+                         class="gallery-image img-fluid w-75 mx-auto d-block">
                 </div>
             {% endfor %}
         </div>
     </div>
-    <div class="row">
-        <div class="vstack mx-auto">
-            <a class="btn btn-lg btn-primary col-8" id="reserve-link-main"
-               href="{{ path('app_reservation') }}">Réserver</a>
-            <a class="btn btn-lg btn-secondary col-8" id="menu-link" href="{{ path('app_menu') }}">Carte et Menus</a>
-        </div>
+    <div class="vstack mx-auto text-center gap-3 my-3">
+        <a class="btn btn-lg btn-primary col-7 mx-auto" id="reserve-link-main"
+           href="{{ path('app_reservation') }}">Réserver</a>
+        <a class="btn btn-secondary d-block col-5 mx-auto" id="menu-link" href="{{ path('app_menu') }}">Carte et Menus</a>
     </div>
 {% endblock %}

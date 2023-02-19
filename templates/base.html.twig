@@ -20,16 +20,16 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
-<body>
-<header class="container-fluid text-center p-2">
-    <div class="row mt-3 mb-3">
+<body class="d-flex flex-column min-vh-100">
+<header class="container-fluid text-center p-2 border-bottom">
+    <div class="row my-1">
     <h1 id="restaurant-name">
         <a href="{{ path('app_homepage') }}">
             Le Quai Antique
         </a>
     </h1>
     </div>
-    <nav class="row mb-3">
+    <nav class="row">
         {% if is_granted('ROLE_USER') %}
             <a id="logout-link" href="{{ path('app_logout') }}" class="col-2 justify-content-center"><img src="{{ asset('images/logout.png') }}" class="small-icon" alt="Se déconnecter"></a>
         {% else %}
@@ -42,8 +42,10 @@
         <a id="reserve-link" href="{{ path('app_reservation') }}" class="col-4">Réserver</a>
     </nav>
 </header>
-{% block body %}{% endblock %}
-<footer class="container-fluid border-top border-3 fixed-bottom">
+<div class="container-fluid my-3">
+    {% block body %}{% endblock %}
+</div>
+<footer class="container-fluid border-top border-3 mt-auto">
     {{ render(path('app_opening_hours')) }}
 </footer>
 </body>
