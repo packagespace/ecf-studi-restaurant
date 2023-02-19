@@ -6,6 +6,7 @@ use App\Entity\DayOpeningHours;
 use App\Entity\Dish;
 use App\Entity\DishCategory;
 use App\Entity\DishPhoto;
+use App\Entity\MaximumNumberOfGuests;
 use App\Entity\Menu;
 use App\Entity\OpeningHourRange;
 use App\Entity\Reservation;
@@ -65,5 +66,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Formules', 'fas fa-list', SetMenu::class);
         yield MenuItem::linkToCrud('Heures d\'ouverture', 'fas fa-list', DayOpeningHours::class);
         yield MenuItem::linkToCrud('Réservations', 'fas fa-list', Reservation::class);
+        yield MenuItem::linkToCrud('Capacité maximale', 'fas fa-list', MaximumNumberOfGuests::class);
     }
 }
