@@ -77,7 +77,7 @@ class ReservationType extends AbstractType
         $form->add('time', ChoiceType::class, [
             'choices'  => array_combine($timeSlotChoices, $timeSlotChoices),
             'disabled' => null === $date || null === $this->numberOfGuests || [] === $timeSlotChoices,
-            'placeholder' => $date && $this->numberOfGuests && [] === $timeSlotChoices ? 'No available slots' : 'Enter number of guests and date'
+            'placeholder' => $date && $this->numberOfGuests && [] === $timeSlotChoices ? 'No available slots' : null
         ]);
     }
 

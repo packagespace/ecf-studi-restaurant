@@ -7,13 +7,13 @@
     <a class="nav-link" href="{{ path('app_menu') }}">Carte</a>
     <a class="nav-link active" aria-current="page" href="#">Menus</a>
     </nav>
-    <ul id="menus">
+    <ul id="menus" class="row px-3">
         {% for menu in menus %}
-            <li class="menu">
-                {{ menu.name }}
-                <ul class="menu-set-menus">
+            <li class="menu col m-3 list-unstyled">
+                <h3 class="display-6 text-center">{{ menu.name }}</h3>
+                <ul class="menu-set-menus list-unstyled">
                     {% for set_menu in menu.setMenus %}
-                        <li class="set-menu">
+                        <li class="set-menu vstack text-center">
                             <span class="set-menu-description">{{ set_menu.description }}</span>
                             <span class="set-menu-price">{{ set_menu.price }}</span>
                         </li>

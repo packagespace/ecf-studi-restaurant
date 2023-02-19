@@ -1,5 +1,9 @@
 <div {{ attributes }}>
-    {{ form_start(form) }}
+    {{ form_start(form, {
+        'attr': {
+            'class' : 'vstack col-9 mx-auto my-3'
+        }
+    }) }}
         {{ form_row(form.numberOfGuests) }}
         {{ form_row(form.date) }}
         {{ form_row(form.time) }}

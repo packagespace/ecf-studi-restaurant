@@ -10,40 +10,28 @@
         <a class="nav-link active" aria-current="page" href="#">Carte</a>
         <a class="nav-link" href="{{ path('app_set_menus') }}">Menus</a>
     </nav>
-    <ul id="dish-categories">
+    <ul id="dish-categories" class="row px-3">
         {% for dish_category in dish_categories %}
-        <li class="dish-category">
-            {{ dish_category.name }}
+        <li class="dish-category col m-3 list-unstyled">
+            <h3 class="display-6 text-center">{{ dish_category.name }}</h3>
             <dl class="category-dishes">
                 {% for dish in dish_category.dishes%}
-                    <dt class="category-dish-name">
+                    <div class="row">
+                    <dt class="category-dish-name col-10">
                         {{ dish.name }}
                     </dt>
-                    <dd class="category-dish-description">
-                        {{ dish.description }}
-                    </dd>
-                    <dd class="category-dish-price">
+                    <dd class="category-dish-price col-2">
                         {{ dish.price }}
                     </dd>
+                        <dd class="category-dish-description col-8 text-muted align-text-top">
+                            <small>
+                            {{ dish.description }}
+                            </small>
+                        </dd>
+                    </div>
                 {% endfor %}
             </dl>
         </li>
     {% endfor %}
-    </ul>
-    <ul id="menus">
-        Menus
-        {% for menu in menus %}
-        <li class="menu">
-            {{ menu.name }}
-            <ul class="menu-set-menus">
-                {% for set_menu in menu.setMenus %}
-                    <li class="set-menu">
-                        <span class="set-menu-description">{{ set_menu.description }}</span>
-                        <span class="set-menu-price">{{ set_menu.price }}</span>
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
-        {% endfor %}
     </ul>
 {% endblock %}
