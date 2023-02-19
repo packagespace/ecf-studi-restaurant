@@ -23,7 +23,7 @@ class TimeSlotGetter
     {
         /** @var ?DayOpeningHours $dayOpeningHours */
         $dayOpeningHours = $this->dayOpeningHoursRepository->findOneBy(['dayOfWeek' => lcfirst($date->format('l'))]);
-        if (!$dayOpeningHours) {
+        if (!$dayOpeningHours || $dayOpeningHours->isClosed()) {
             return [];
         }
         $reservations = $this->reservationRepository->findBy(['date' => $date]);
@@ -47,7 +47,6 @@ class TimeSlotGetter
      */
     private function dayOpeningHoursHasAvailableLunchSlots(array $reservations, DayOpeningHours $dayOpeningHours): bool
     {
-
         $sumGuests = 0;
         foreach ($reservations as $reservation) {
             if ($this->reservationIsDuringLunch($reservation, $dayOpeningHours)) {
