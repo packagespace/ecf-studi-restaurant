@@ -4,10 +4,11 @@
     <div data-controller="carousel" class="swiper" data-carousel-options-value='{"autoplay": true}'>
         <div class="swiper-wrapper">
             {% for dish_photo in dish_photos %}
-                <div class="swiper-slide">
+                <figure class="swiper-slide figure gallery-image-container">
                     <img alt="Gallery image" src="{{ asset(dish_photo.image) }}"
-                         class="gallery-image img-fluid w-75 mx-auto d-block">
-                </div>
+                         class="gallery-image img-fluid w-75 mx-auto d-block figure-img">
+                    <figcaption class="position-absolute top-50 start-50 translate-middle dish-caption alert alert-light">{{ dish_photo.title }}</figcaption>
+                </figure>
             {% endfor %}
         </div>
     </div>

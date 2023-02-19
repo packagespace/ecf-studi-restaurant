@@ -6,3 +6,11 @@ body {
     width: 32px;
     height: 32px;
 }
+
+.dish-caption{
+    opacity: 0;
+}
+
+.gallery-image:hover ~ .dish-caption{
+    opacity: 1;
+}
