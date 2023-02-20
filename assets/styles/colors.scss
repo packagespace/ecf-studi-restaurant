@@ -1,0 +1,16 @@
+@import url(https://fonts.googleapis.com/css2?family=Courgette&family=Enriqueta);
+
+/* custom.scss */
+$primary: #8C1C13;
+$secondary: #FBF5F3;
+//$success: #3e8d63;
+$info: #FDB321;
+$warning: #2E5266;
+//$danger: #d62518;
+//$light: #f8f9fa;
+//$dark: #343a40;
+/* end custom.scss */
+
+$display-font-family: "Courgette";
+$font-family-base: "Enriqueta";
+@import 'bootstrap/scss/bootstrap.scss';

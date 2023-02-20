@@ -1,3 +1,4 @@
+<div class="text-primary mx-auto text-center h4 my-2">Horaires</div>
 <dl class="mx-3">
     {% for day in day_opening_hours %}
         <div class="row text-nowrap lh-1">
@@ -8,8 +9,9 @@
             </dt>
             {% if day.isClosed %}
                 <dd class="col-8 text-center">
-                    Fermé
-                </dd>
+                    <small>
+                        Fermé
+                    </small></dd>
             {% else %}
                 <dd class="col-4">
 

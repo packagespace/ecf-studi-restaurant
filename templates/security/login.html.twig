@@ -19,10 +19,10 @@
                value="{{ csrf_token('authenticate') }}"
         >
 
-        <button class="btn btn-lg btn-primary col-9 mx-auto" type="submit">
+        <button class="btn btn-lg btn-primary col-9 mx-auto shadow-sm" type="submit">
             Sign in
         </button>
     </form>
 
-    <a href="{{ path('app_register') }}" class="d-block btn btn-secondary btn-sm col-6 mx-auto">Créer un compte</a>
+    <a href="{{ path('app_register') }}" class="d-block btn btn-secondary border border-primary btn-sm col-6 mx-auto">Créer un compte</a>
 {% endblock %}

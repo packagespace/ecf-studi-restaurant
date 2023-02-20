@@ -7,7 +7,8 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
-import 'bootstrap/scss/bootstrap.scss';
+import './styles/colors.scss';
+// import 'bootstrap/scss/bootstrap.scss';
 import 'swiper/swiper-bundle.css'
 import 'bootstrap';
 import 'flatpickr/dist/flatpickr.css';

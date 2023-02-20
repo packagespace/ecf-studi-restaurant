@@ -8,6 +8,10 @@
         {{ form_row(form.date) }}
         {{ form_row(form.time) }}
         {{ form_row(form.allergies) }}
-        {{ form_row(form.submit) }}
+        {{ form_widget(form.submit, {
+            'attr': {
+                'class': 'btn btn-lg btn-primary col-9 mx-auto shadow-sm'
+            }
+        }) }}
     {{ form_end(form) }}
 </div>

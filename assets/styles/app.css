@@ -5,6 +5,7 @@ body {
 .small-icon {
     width: 32px;
     height: 32px;
+    filter: invert(100%);
 }
 
 .dish-caption{
