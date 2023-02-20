@@ -49,7 +49,7 @@ class ReservationType extends AbstractType
         $builder->add('allergies', TextareaType::class, [
             'required' => false
         ]);
-        $builder->add('submit', SubmitType::class);
+        $builder->add('confirm', SubmitType::class);
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,

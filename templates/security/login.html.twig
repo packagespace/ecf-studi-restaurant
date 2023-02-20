@@ -8,10 +8,10 @@
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
-        <label class="form-label" for="inputEmail">Email</label>
+        <label class="form-label" for="inputEmail">Adresse email</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-3"
                autocomplete="email" required autofocus>
-        <label class="form-label" for="inputPassword">Password</label>
+        <label class="form-label" for="inputPassword">Mot de passe</label>
         <input type="password" name="password" id="inputPassword" class="form-control mb-3" autocomplete="current-password"
                required>
 
@@ -20,7 +20,7 @@
         >
 
         <button class="btn btn-lg btn-primary col-9 mx-auto shadow-sm" type="submit">
-            Sign in
+            Connexion
         </button>
         <a href="{{ path('app_register') }}" class="d-block btn btn-secondary border border-primary btn-sm col-6 mx-auto mt-3">Créer un compte</a>
     </form>

@@ -49,11 +49,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureCrud(): Crud
     {
-        return Crud::new()
-            ->setPageTitle('index', 'Le Quai Antique - Administration - %entity_name%')
-            ->setPageTitle('detail', 'Le Quai Antique - Administration - %entity_name%')
-            ->setPageTitle('new', 'Le Quai Antique - Administration - %entity_name%')
-            ->setPageTitle('edit', 'Le Quai Antique - Administration - %entity_name%');
+        return Crud::new();
     }
 
     public function configureMenuItems(): iterable
