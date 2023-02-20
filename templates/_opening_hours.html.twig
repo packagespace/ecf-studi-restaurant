@@ -1,14 +1,14 @@
-<div class="text-primary mx-auto text-center h4 my-2">Horaires</div>
-<dl class="mx-3">
+<div class="text-primary mx-auto text-center h4 my-2 my-sm-2">Horaires</div>
+<dl class="col col-sm-6 col-md-4 col-lg-3 col-xxl-2 mx-auto">
     {% for day in day_opening_hours %}
-        <div class="row text-nowrap lh-1">
+        <div class="row text-nowrap lh-1 text-center">
             <dt class="col-4 text-end">
                 <small>
                     {{ day.getDayLabel | trans }}
                 </small>
             </dt>
             {% if day.isClosed %}
-                <dd class="col-8 text-center">
+                <dd class="col-4 text-center">
                     <small>
                         Fermé
                     </small></dd>
