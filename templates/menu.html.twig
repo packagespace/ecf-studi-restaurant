@@ -12,7 +12,7 @@
     </nav>
     <ul id="dish-categories" class="row px-3">
         {% for dish_category in dish_categories %}
-        <li class="dish-category col m-3 list-unstyled">
+        <li class="dish-category col-12 col-sm-6 col-lg-4 col-xxl-3 gx-3 list-unstyled">
             <h3 class="display-6 text-center">{{ dish_category.name }}</h3>
             <dl class="category-dishes">
                 {% for dish in dish_category.dishes%}

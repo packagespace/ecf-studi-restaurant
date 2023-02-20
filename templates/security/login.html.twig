@@ -3,7 +3,7 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <form method="post" class="vstack col-9 mx-auto my-3">
+    <form method="post" class="vstack col-9 col-sm-6 col-md-5 col-lg-4 col-xl-3 mx-auto my-3">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
@@ -22,7 +22,7 @@
         <button class="btn btn-lg btn-primary col-9 mx-auto shadow-sm" type="submit">
             Sign in
         </button>
+        <a href="{{ path('app_register') }}" class="d-block btn btn-secondary border border-primary btn-sm col-6 mx-auto mt-3">Créer un compte</a>
     </form>
 
-    <a href="{{ path('app_register') }}" class="d-block btn btn-secondary border border-primary btn-sm col-6 mx-auto">Créer un compte</a>
 {% endblock %}

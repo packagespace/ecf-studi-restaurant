@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div data-controller="carousel" class="swiper col-10 col-sm-9" data-carousel-options-value='{"autoplay": true}'>
+    <div class="col-10 col-sm-9 col-md-6 col-lg-5 col-xl-4 col-xxl-3 mx-auto">
+    <div data-controller="carousel" class="swiper" data-carousel-options-value='{"autoplay": true}'>
         <div class="swiper-wrapper">
             {% for dish_photo in dish_photos %}
                 <figure class="swiper-slide figure gallery-image-container">
@@ -16,5 +17,6 @@
         <a class="btn btn-lg btn-primary col-7 mx-auto shadow" id="reserve-link-main"
            href="{{ path('app_reservation') }}">Réserver</a>
         <a class="btn btn-secondary border-primary shadow-sm d-block col-5 mx-auto" id="menu-link" href="{{ path('app_menu') }}">Carte et Menus</a>
+    </div>
     </div>
 {% endblock %}

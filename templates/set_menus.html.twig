@@ -9,7 +9,7 @@
     </nav>
     <ul id="menus" class="row px-3">
         {% for menu in menus %}
-            <li class="menu col m-3 list-unstyled">
+            <li class="menu col-12 col-md-6 col-xl-4 g-3 list-unstyled">
                 <h3 class="display-6 text-center">{{ menu.name }}</h3>
                 <ul class="menu-set-menus list-unstyled">
                     {% for set_menu in menu.setMenus %}
