@@ -13,7 +13,7 @@ class OpeningHoursController extends AbstractController
     #[Route('/opening/hours', name: 'app_opening_hours')]
     public function index(DayOpeningHoursRepository $repository): Response
     {
-        $dayOpeningHours = $repository->findAll();
+        $dayOpeningHours = $repository->findAllInOrder();
         return $this->render('_opening_hours.html.twig', [
             'day_opening_hours' => $dayOpeningHours,
         ]);
