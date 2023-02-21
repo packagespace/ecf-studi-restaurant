@@ -1,46 +1,60 @@
-# Symfony Docker
+# Local install
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html), HTTP/3 and HTTPS support.
+## Requirements
 
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+ * Docker (v2.10+)
+ * npm
 
-## Getting Started
+## Run locally
 
-1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Run `docker compose build --pull --no-cache` to build fresh images
-3. Run `docker compose up` (the logs will be displayed in the current shell)
-4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+In a terminal: 
 
-## Features
+ * `docker compose up` (This can take a while when building for the first time! 1300s on my last attempt)
+ * `docker compose exec php sh`
+ * `chmod 777 -R public/uploads/dishes` (This is a fix to allow uploading of images through the website. It is probably not optimal)
 
-* Production, development and CI ready
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-* Automatic HTTPS (in dev and in prod!)
-* HTTP/2, HTTP/3 and [Preload](https://symfony.com/doc/current/web_link.html) support
-* Built-in [Mercure](https://symfony.com/doc/current/mercure.html) hub
-* [Vulcain](https://vulcain.rocks) support
-* Native [XDebug](docs/xdebug.md) integration
-* Just 2 services (PHP FPM and Caddy server)
-* Super-readable configuration
+In a second terminal: 
 
-**Enjoy!**
+ * `npm install`
+ * `npm run watch` (The node container seems to not compile the files)
 
-## Docs
+Open `https://localhost` (you might have to accept an unsigned certificate)
 
-1. [Build options](docs/build.md)
-2. [Using Symfony Docker with an existing project](docs/existing-project.md)
-3. [Support for extra services](docs/extra-services.md)
-4. [Deploying in production](docs/production.md)
-5. [Debugging with Xdebug](docs/xdebug.md)
-6. [TLS Certificates](docs/tls.md)
-7. [Using a Makefile](docs/makefile.md)
-8. [Troubleshooting](docs/troubleshooting.md)
+## Create the user admin
 
-## License
+You can generate the fixtures on the dev database and use the account `test@mail.com:root`
 
-Symfony Docker is available under the MIT License.
+You can also make your own admin account through the database:
+ * `docker compose exec php sh`
+ * `php bin/console security:hash-password`
+ * Follow the prompt and copy the password hash
+ * `exit`
+ * `docker compose exec database psql -U app`
+ * Run the following command, replacing `EMAIL` with your email and `PASSWORD` with the copied hash
+ * `INSERT INTO "user" (id, email, roles, password) VALUES (nextval('user_id_seq'), 'EMAIL', '["ROLE_ADMIN"]', 'PASSWORD');`
 
-## Credits
+## Generate some blank data (opening hours, maximum number of guests
 
-Created by [Kévin Dunglas](https://dunglas.fr), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+ * `docker compose exec php sh`
+ * `php bin/console app:generate-entities`
+
+## Generate some fixture data on the dev database
+
+ * `docker compose exec php sh`
+ * `php bin/console doctrine:fixtures:load`
+ * Accept the prompt
+
+## Testing
+
+### Create the test database with fixture data
+
+ * `docker compose exec php sh`
+ * `php bon/console doctrine:database:create --env=test`
+ * `php bin/console doctrine:schema:create --env=test`
+ * `php bin/console doctrine:fixtures:load --env=test`
+ * Accept the prompt
+
+### Running tests
+
+ * `docker compose exec php sh`
+ * `php bin/phpunit` (available test suites to use with the `--testsuite` option: `unit`, `integration`, `functional`
