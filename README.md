@@ -49,7 +49,7 @@ You can also make your own admin account through the database:
 ### Create the test database with fixture data
 
  * `docker compose exec php sh`
- * `php bon/console doctrine:database:create --env=test`
+ * `php bin/console doctrine:database:create --env=test`
  * `php bin/console doctrine:schema:create --env=test`
  * `php bin/console doctrine:fixtures:load --env=test`
  * Accept the prompt
