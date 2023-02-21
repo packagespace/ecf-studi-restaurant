@@ -56,5 +56,7 @@ You can also make your own admin account through the database:
 
 ### Running tests
 
+You must start the containers with `docker compose up `
+
  * `docker compose exec php sh`
  * `php bin/phpunit` (available test suites to use with the `--testsuite` option: `unit`, `integration`, `functional`

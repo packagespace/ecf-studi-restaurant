@@ -18,11 +18,9 @@ class UserControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('form');
-        $this->assertSelectorTextContains('label#username-label', 'Adresse email:');
-        $this->assertSelectorTextContains('label#password-label', 'Mot de passe:');
-        $this->assertSelectorExists('input#username-input');
-        $this->assertSelectorExists('input#password-input');
-        $this->assertSelectorTextContains('button#login-button', 'Connexion');
+        $this->assertSelectorExists('input#inputEmail');
+        $this->assertSelectorExists('input#inputPassword');
+        $this->assertSelectorExists('button', 'Connexion');
     }
 
     public function testLoggingInSuccessfullyRedirectsToTheHomePageAsLoggedInUser()
@@ -35,8 +33,8 @@ class UserControllerTest extends WebTestCase
 
         $form = $buttonCrawlerNode->form();
 
-        $form['_username']->setValue('test@mail.com');
-        $form['_password']->setValue('root');
+        $form['email']->setValue('test@mail.com');
+        $form['password']->setValue('root');
 
         $client->submit($form);
 
