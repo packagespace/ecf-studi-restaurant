@@ -77,12 +77,21 @@ class DayOpeningHoursRepository extends ServiceEntityRepository
      */
     public function findAllInOrder(): array
     {
+        $daysOfWeek = [
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday',
+            'sunday'
+        ];
         $days = $this->findAll();
         usort(
             $days,
-            fn(DayOpeningHours $dayA, DayOpeningHours $dayB) =>
-                \DateTimeImmutable::createFromFormat('l', $dayA->getDayOfWeek())
-                > \DateTimeImmutable::createFromFormat('l', $dayB->getDayOfWeek())
+            function (DayOpeningHours $dayA, DayOpeningHours $dayB) use ($daysOfWeek) {
+                return array_search($dayA->getDayOfWeek(), $daysOfWeek) > array_search($dayB->getDayOfWeek(), $daysOfWeek);
+                    }
         );
 
         return $days;
