@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\DayOpeningHoursRepository;
 use App\Validator\ValidDayOpeningHour;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ValidDayOpeningHour]
 #[ORM\Entity(repositoryClass: DayOpeningHoursRepository::class)]
@@ -15,18 +16,27 @@ class DayOpeningHours
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $dayOfWeek = null;
 
+    #[Assert\LessThanOrEqual(23)]
+    #[Assert\GreaterThanOrEqual(0)]
     #[ORM\Column(nullable: true)]
     private ?int $lunchOpeningTime = null;
 
+    #[Assert\LessThanOrEqual(23)]
+    #[Assert\GreaterThanOrEqual(0)]
     #[ORM\Column(nullable: true)]
     private ?int $lunchClosingTime = null;
 
+    #[Assert\LessThanOrEqual(23)]
+    #[Assert\GreaterThanOrEqual(0)]
     #[ORM\Column(nullable: true)]
     private ?int $dinnerOpeningTime = null;
 
+    #[Assert\LessThanOrEqual(23)]
+    #[Assert\GreaterThanOrEqual(0)]
     #[ORM\Column(nullable: true)]
     private ?int $dinnerClosingTime = null;
 

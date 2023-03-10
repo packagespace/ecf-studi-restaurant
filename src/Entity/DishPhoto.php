@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DishPhotoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: DishPhotoRepository::class)]
 class DishPhoto
@@ -13,9 +14,11 @@ class DishPhoto
     #[ORM\Column]
     private ?int $id = null;
 
+    #[NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 

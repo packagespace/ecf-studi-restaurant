@@ -6,6 +6,7 @@ use App\Repository\MenuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: MenuRepository::class)]
 class Menu
@@ -15,6 +16,7 @@ class Menu
     #[ORM\Column]
     private ?int $id = null;
 
+    #[NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 

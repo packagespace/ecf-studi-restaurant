@@ -35,7 +35,9 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('defaultNumberOfGuests', IntegerType::class)
-            ->add('allergies', TextareaType::class);
+            ->add('allergies', TextareaType::class, [
+                'required' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

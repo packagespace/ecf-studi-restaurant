@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\MaximumNumberOfGuestsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
 
 #[ORM\Entity(repositoryClass: MaximumNumberOfGuestsRepository::class)]
 class MaximumNumberOfGuests
@@ -13,6 +15,8 @@ class MaximumNumberOfGuests
     #[ORM\Column]
     private ?int $id = null;
 
+    #[NotBlank]
+    #[Positive]
     #[ORM\Column]
     private ?int $MaximumNumberOfGuests = null;
 
